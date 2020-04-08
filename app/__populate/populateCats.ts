@@ -10,7 +10,7 @@ export default async () => {
 	if(count > 0) {
 		console.notify(`There are enough cats ${count} in the DB`);
 	} else {
-		for(let i = 0; i < 1000; i++) await generateRandomBreed();
+		for(let i = 0; i < 10; i++) await generateRandomBreed();
 	}
 };
 
