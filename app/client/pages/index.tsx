@@ -6,8 +6,8 @@ import {
 	CatThumbnail
 } from '../components';
 
-const Page = ({ data }) => (
-	<div className="hello">
+const Page = () => (
+	<div>
 		<GlobalStyles />
 		<h1>Hello</h1>
 		<InfiniteBox
@@ -30,7 +30,6 @@ Page.getInitialProps = async () => {
 		breedCount
 		countryCount
 	}`);
-
 	return {
 		data
 	};

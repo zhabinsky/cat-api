@@ -17,6 +17,10 @@ interface Props {
 
 // Helped https://alligator.io/react/react-infinite-scroll/
 
+interface InfiniteBoxResponse {
+	items: Array<object>;
+}
+
 const InfiniteBox = (props: Props) => {
 	const { title,className,createQuery,pageSize,itemComponent: ItemComponent } = props;
 	const [items,setItems] = React.useState([]);
@@ -25,7 +29,8 @@ const InfiniteBox = (props: Props) => {
 	const loadMore = () => {
 		setIsLoading(true);
 		gq(createQuery(items.length,pageSize))
-			.then(({ items: newItems }) => {
+			.then((response: InfiniteBoxResponse) => {
+				const { items: newItems } = response;
 				const a = [...items,...newItems];
 				console.log(a);
 				setItems(a);

@@ -1,7 +1,7 @@
 import express from 'express';
 import connectDB from './db/connect';
 import * as Middleware from './middleware';
-import populate from '../__populateData';
+import populate from '../__populate';
 
 
 async function init() {
@@ -15,7 +15,6 @@ async function init() {
 
 	app.use('/public-assets',...Middleware.static);
 	app.use('/graphql',...Middleware.graphql);
-
 	app.use(...Middleware.client);
 
 	const PORT = Number(process.env.PORT);
