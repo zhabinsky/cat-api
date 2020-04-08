@@ -1,10 +1,13 @@
 import fs from 'fs';
+import path from 'path';
 import request from 'request';
 
 /** 
  * Downloads a file and places it under app/static/
  * Is used when populating app with random data
  */
+
+const isProd = process.env.NODE_ENV === "production";
 
 export default function download(url: string,name: string) {
 	return new Promise((resolve,reject) => {
@@ -17,9 +20,11 @@ export default function download(url: string,name: string) {
 
 			if(!extension) return reject('No extension found for content-type=' + contentType);
 
-			const filename = 'public-assets/' + name + extension;
+			const filename = name + extension;
+			const filePath = path.resolve(__dirname,isProd ? '../../../../public-assets/' : '../../../public-assets/',filename) as string;
+			console.log('download path');
 
-			fs.writeFile(filename,body,'binary',function(err) {
+			fs.writeFile(filePath,body,'binary',function(err) {
 				if(err) return reject('Could not save' + err);
 
 				resolve(name + extension);

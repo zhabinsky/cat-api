@@ -7,10 +7,12 @@ import chalk from 'chalk';
 export default async () => {
 	const count = await Models.Breed.Model.countDocuments();
 
-	if(count > 0) {
+	if(count > 1000) {
 		console.notify(`There are enough cats ${count} in the DB`);
 	} else {
-		for(let i = 0; i < 10; i++) await generateRandomBreed();
+		for(let i = 0; i < 1000; i++) {
+			await generateRandomBreed(i);
+		}
 	}
 };
 
@@ -44,7 +46,7 @@ const lorem = new LoremIpsum({
 	}
 });
 
-const generateRandomBreed = async () => {
+const generateRandomBreed = async (index: number) => {
 	try {
 		const picture = await download('https://cataas.com/cat',randomFilename());
 		const description = lorem.generateSentences(5);
@@ -66,7 +68,7 @@ const generateRandomBreed = async () => {
 		};
 
 		await new Models.Breed.Model(breed).save();
-		console.log(chalk.yellow('Added random breed'),name);
+		console.log(chalk.yellow('Added random breed'),name,index);
 	} catch(e) {
 		console.error(e);
 	}
