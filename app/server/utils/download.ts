@@ -20,7 +20,7 @@ export default function download(url: string,name: string) {
 			const filename = 'public-assets/' + name + extension;
 
 			fs.writeFile(filename,body,'binary',function(err) {
-				if(err) return reject();
+				if(err) return reject('Could not save' + err);
 
 				resolve(name + extension);
 			});
