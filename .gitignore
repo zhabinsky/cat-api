@@ -1,0 +1,9 @@
+build/
+node_modules/
+.vscode/
+app/client/.next/
+
+public-assets/*.png
+public-assets/*.jpeg
+
+todo

@@ -1,0 +1,2 @@
+This folder is going to be used to store downloaded cat images.
+We serve its contents under /static endpoint.

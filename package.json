@@ -1,0 +1,43 @@
+{
+  "name": "telia-kittens",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tsc": "tsc",
+    "dev": "ts-node-dev --ignore-watch app/client --respawn --transpileOnly ./index.ts",
+    "prod": "tsc && node ./build/index.js"
+  },
+  "keywords": [],
+  "author": "Vlad Zhabinsky <vladislavzhabinsky@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "classnames": "^2.2.6",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-graphql": "^0.9.0",
+    "graphql": "^15.0.0",
+    "graphql-compose": "^7.14.1",
+    "graphql-compose-mongoose": "^7.3.5",
+    "lorem-ipsum": "^2.0.3",
+    "mongoose": "^5.9.7",
+    "next": "^9.3.4",
+    "node-fetch": "^2.6.0",
+    "nodemon": "^2.0.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "request": "^2.88.2",
+    "styled-components": "^5.1.0"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.4",
+    "@types/graphql": "^14.5.0",
+    "@types/mongoose": "^5.7.8",
+    "@types/node": "^13.11.0",
+    "@types/react": "^16.9.32",
+    "babel-plugin-styled-components": "^1.10.7",
+    "ts-node-dev": "^1.0.0-pre.44",
+    "typescript": "^3.8.3"
+  }
+}
