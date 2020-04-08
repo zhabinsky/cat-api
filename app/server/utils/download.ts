@@ -22,7 +22,6 @@ export default function download(url: string,name: string) {
 
 			const filename = name + extension;
 			const filePath = path.resolve(__dirname,isProd ? '../../../../public-assets/' : '../../../public-assets/',filename) as string;
-			console.log('download path');
 
 			fs.writeFile(filePath,body,'binary',function(err) {
 				if(err) return reject('Could not save' + err);
