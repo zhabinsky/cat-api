@@ -7,7 +7,7 @@ import chalk from 'chalk';
 export default async () => {
 	const count = await Models.Breed.Model.countDocuments();
 
-	if(count === 0) {
+	if(count > 0) {
 		console.notify(`There are enough cats ${count} in the DB`);
 	} else {
 		for(let i = 0; i < 1000; i++) await generateRandomBreed();
