@@ -8,7 +8,7 @@
     "dev": "export NODE_ENV=dev && ts-node-dev --ignore-watch app/client --respawn --transpileOnly ./index.ts",
     "build-fe": "cd build/app/client && rm -rf .next && next build",
     "prepare-build-dir": "rm -rf build && mkdir build && cp .env build/.env",
-    "prod": "npm run prepare-build-dir && tsc && export NODE_ENV=production && npm run build-fe && cd build && node index.js"
+    "start": "npm run prepare-build-dir && tsc && export NODE_ENV=production && npm run build-fe && cd build && node index.js"
   },
   "keywords": [],
   "author": "Vlad Zhabinsky <vladislavzhabinsky@gmail.com>",
