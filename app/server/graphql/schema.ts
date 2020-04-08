@@ -36,11 +36,16 @@ schemaComposer.Query.addFields({
  * This resource explained how to build a relation
  * https://github.com/graphql-compose/graphql-compose-mongoose#how-to-build-nestingrelations
  */
+
+interface Breed {
+	origin: string;
+}
+
 BreedTC.addRelation(
 	'origin',
 	{
 		resolver: () => CountryTC.getResolver('findById'),
-		prepareArgs: { _id: (breed: object) => breed.origin },
+		prepareArgs: { _id: (breed: Breed) => breed.origin },
 		projection: { origin: 1 }, // required fields from source object
 	}
 );
@@ -50,7 +55,7 @@ CountryTC.addRelation(
 	{
 		resolver: () => BreedTC.get('$findMany'), // shorthand for `UserTC.getResolver('findMany')`
 		prepareArgs: {
-			filter: (source) => ({
+			filter: (source: Breed) => ({
 				_operators: {
 					_id: source.origin
 				}

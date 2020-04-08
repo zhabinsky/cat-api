@@ -1,20 +1,22 @@
 import React from 'react';
 import gq from '../api/gq';
-import { GlobalStyles,InfiniteBox,CatThumbnail } from '../components';
+import {
+	GlobalStyles,
+	InfiniteBox,
+	CatThumbnail
+} from '../components';
 
 const Page = ({ data }) => (
 	<div className="hello">
 		<GlobalStyles />
-		<pre>
-			{JSON.stringify(data,null,2)}
-		</pre>
+		<h1>Hello</h1>
 		<InfiniteBox
+			className=""
 			title={'Breeds'}
-			pageSize={8}
+			pageSize={12}
 			itemComponent={CatThumbnail}
 			createQuery={(skip: number,limit: number) => `{
 				items: breedMany (limit:${limit}, skip:${skip}) {
-					_id
 					name
 					picture
 				}

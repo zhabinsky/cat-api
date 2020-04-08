@@ -10,4 +10,9 @@ export default createGlobalStyle`
 		max-width: 1000px;
 		margin: 0 auto;
 	}
+
+	h1, h2, h3, h4 {
+		font-family: 'Comic Neue', cursive;
+		font-weight: 700;
+	}
 `;
