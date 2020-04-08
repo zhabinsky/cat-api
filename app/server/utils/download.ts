@@ -12,9 +12,10 @@ export default function download(url: string,name: string) {
 
 			if(error) return reject(error);
 
-			const extension = contentTypeToExtension[res.headers['content-type']];
+			const contentType = res.headers['content-type'];
+			const extension = contentTypeToExtension[contentType];
 
-			if(!extension) return reject();
+			if(!extension) return reject('No extension found for content-type=' + contentType);
 
 			const filename = 'public-assets/' + name + extension;
 
