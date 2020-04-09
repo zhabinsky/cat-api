@@ -74,7 +74,7 @@ export default styled(InfiniteBox)`
 		display: grid;
 		grid-template-columns: 1fr;
 		grid-gap: 15px;
-		@media (min-width: 300px) {
+		@media (min-width: 550px) {
 			grid-template-columns: repeat(2, 1fr);
 			grid-gap: 17px;
 		}
