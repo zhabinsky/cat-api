@@ -12,6 +12,8 @@ An app where user can see list of cat breeds.
 - Clean code, component based structure and best coding practices in use.
 - Clear API URL endpoints.
 - Accessibility/Security.
-- Good data structure.
 - Attention to detail.
+- Good data structure.
+
 - Ability to discuss and argue the solutions.
+	- Let's talk!

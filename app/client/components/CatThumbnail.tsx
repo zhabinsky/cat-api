@@ -23,8 +23,10 @@ const CatThumbnail = (props: ThumbnailProps) => {
 	const [size,setSize] = React.useState([1,1]);
 	const [isMouseOver,setMouseOver] = React.useState(false);
 
+	const [allowAnimations,setAllowAnimations] = React.useState(false);
+
 	// if image is horizontal, we scale it up to fill the container
-	const imageScale = (isMouseOver ? 0.03 : 0) + 1.1 + Math.max(0,1 - (size[0] / size[1]));
+	const imageScale = (isMouseOver ? 0.08 : 0) + Math.max((size[0] / size[1]) / 0.8,1);
 	const imageUrl = `/public-assets/${picture}`;
 	const isLoading = size[0] === 1;
 
@@ -39,8 +41,16 @@ const CatThumbnail = (props: ThumbnailProps) => {
 		setSize([width,height]);
 	};
 
+	React.useEffect(() => {
+		// we will allow hovering animations when Image has finished loading 
+		// and we know its dimensions, this is done to avoid flickering while resizing
+		if(!allowAnimations && !allowAnimations) {
+			setTimeout(() => setAllowAnimations(true),500);
+		}
+	},[isLoading]);
+
 	return (
-		<article className={classnames(className,{ hover: isMouseOver,loading: isLoading })}>
+		<article className={classnames(className,{ hover: isMouseOver,loading: isLoading,"animations-allowed": allowAnimations })}>
 			<div className="head">
 				<img
 					onMouseEnter={() => setMouseOver(true)}
@@ -68,25 +78,24 @@ export default styled(CatThumbnail)`
 		width: 100%;
 		position: relative;
 		overflow: hidden;
-		padding-top: 70%;
+		padding-top: 80%;
 		border-radius: 10px;
 		cursor: pointer;
 	}
 
 	img {
 		position: absolute;
+		width: 100%;
 		top: 0;
 		left: 0;
-		width: 100%;
+		transform-origin: top center;
+		transition: opacity 0.5s ease-in;
 	}
 
-	img.loaded {
-		transition: transform 0.1s ease-in;
-	}
-
-	img,
-	.body {
-		transition: opacity 1s ease-in;
+	&.animations-allowed {
+		img {
+			transition: all 0.5s ease-out;
+		}
 	}
 
 	&.loading img,
