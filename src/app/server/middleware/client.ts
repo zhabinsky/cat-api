@@ -16,7 +16,7 @@ const nextApp = app.prepare().then(() => {
 
 const sendClientApp = async (req: any, res: any) => {
     const parsedUrl = parse(req.url, true);
-    const { pathname, query } = parsedUrl;
+    // const { pathname, query } = parsedUrl;
 
     if (!donePreparing) {
         await nextApp;

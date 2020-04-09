@@ -21,13 +21,12 @@ const Card: FunctionComponent<Props> = (props: Props) => {
      * For now, we will assume that the image is square
      */
     const [size, setSize] = React.useState([1, 1]);
-    const [isMouseOver, setMouseOver] = React.useState(false);
-
+    const [hovered, setMouseOver] = React.useState(false);
     const [allowAnimations, setAllowAnimations] = React.useState(false);
 
     // if image is horizontal, we scale it up to fill the container
     const imageScale =
-        (isMouseOver ? 0.08 : 0) + Math.max(size[0] / size[1] / 0.8, 1);
+        (hovered ? 0.08 : 0) + Math.max(size[0] / size[1] / 0.8, 1);
     const imageUrl = `/public-assets/${picture}`;
     const isLoading = size[0] === 1;
 
@@ -51,7 +50,7 @@ const Card: FunctionComponent<Props> = (props: Props) => {
     }, [isLoading]);
 
     const cardClassNames = classnames(className, {
-        hover: isMouseOver,
+        hover: hovered,
         loading: isLoading,
         interact: allowAnimations,
     });

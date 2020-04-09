@@ -3,6 +3,7 @@ import * as Models from '../server/models';
 import { LoremIpsum } from 'lorem-ipsum';
 import getRandomWord from './getRandomWord';
 import chalk from 'chalk';
+import { generateCatName } from './utils';
 
 export default async () => {
     const count = await Models.Breed.Model.countDocuments();
@@ -55,9 +56,7 @@ const generateRandomBreed = async (index: number) => {
         const temperament = getRandomWord('CAT_TEMPERAMENT');
         const countryId = await getRandomCountry();
 
-        const name = ['CAT_NATIONALITY', 'CAT_ADJECTIVES', 'CAT_NICKNAME']
-            .map(getRandomWord)
-            .join(' ');
+        const name = generateCatName();
 
         const breed = {
             name,

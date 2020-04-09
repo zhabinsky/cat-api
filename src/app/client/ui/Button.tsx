@@ -1,4 +1,4 @@
-import React, { ReactElement, FunctionComponent, Component } from 'react';
+import React, { FunctionComponent } from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 
@@ -19,7 +19,7 @@ const Button: FunctionComponent<Props> = (props: Props) => {
     );
 };
 
-const select = (key) => (p) => p[key];
+const select = key => p => p[key];
 export default styled(Button)`
     background: red;
     font-size: 16px;
