@@ -1,19 +1,19 @@
 import chalk from 'chalk';
 
 const extension = {
-	ok: (...args: Array<any>) => {
-		console.log(chalk.green('OK:'),args.map(String).join(', '));
-	},
-	notify: (...args: Array<any>) => {
-		console.log(chalk.blue('Notification:'),args.map(String).join(', '));
-	}
+    ok: (...args: any[]) => {
+        console.log(chalk.green('OK:'), args.join(', '));
+    },
+    notify: (...args: any[]) => {
+        console.log(chalk.blue('Notification:'), args.join(', '));
+    },
 };
 
 declare global {
-	interface Console {
-		ok: Function,
-		notify: Function;
-	}
+    interface Console {
+        ok: (...arguments: string[]) => void;
+        notify: (...arguments: string[]) => void;
+    }
 }
 
-Object.assign(console,extension);
+Object.assign(console, extension);

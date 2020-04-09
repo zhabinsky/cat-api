@@ -1,64 +1,68 @@
-import React,{ ReactElement,FunctionComponent,Component } from 'react';
+import React, { ReactElement, FunctionComponent, Component } from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 
 interface Props {
-	className?: string;
-	children?: any;
-	ripple?: boolean;
-	square?: boolean;
-	backgroundColor?: string;
+    className?: string;
+    children?: any;
+    ripple?: boolean;
+    square?: boolean;
+    backgroundColor?: string;
 }
 
 const Button: FunctionComponent<Props> = (props: Props) => {
-	const { className,children,ripple = true,square = false } = props;
-	return (
-		<button className={classnames(className,{ ripple,square })}>
-			<span>{children}</span>
-		</button>
-	);
+    const { className, children, ripple = true, square = false } = props;
+    return (
+        <button className={classnames(className, { ripple, square })}>
+            <span>{children}</span>
+        </button>
+    );
 };
 
-
-const select = (key) => p => p[key];
+const select = (key) => (p) => p[key];
 export default styled(Button)`
-	background: red;
-	font-size: 16px;
-	text-transform: uppercase;
-	cursor: pointer;
-	color: white;
-	background-color: ${select('backgroundColor')};
-	outline: none;
-	border: none;
+    background: red;
+    font-size: 16px;
+    text-transform: uppercase;
+    cursor: pointer;
+    color: white;
+    background-color: ${select('backgroundColor')};
+    outline: none;
+    border: none;
 
-	&.ripple {
-		background-position: center;
-		transition: background 1.2s;
-	}
-	&.ripple:hover {
-		background: ${select('backgroundColor')} radial-gradient(circle, transparent 3%, ${select('backgroundColor')} 1%) center/15000%;
-	}
-	&.ripple:active {
-		background-color: rgba(0,0,0,0.1);
-		background-size: 100%;
-		transition: background 0s;
-	}
-	&.square span {
-		width: 20px;
-		height: 20px;
-	}
-	&.square {
-		width:  35px;
-		height: 35px;
-		border-radius: 50%;
+    &.ripple {
+        background-position: center;
+        transition: background 1.2s;
+    }
+    &.ripple:hover {
+        background: ${select('backgroundColor')}
+            radial-gradient(
+                circle,
+                transparent 3%,
+                ${select('backgroundColor')} 1%
+            )
+            center/15000%;
+    }
+    &.ripple:active {
+        background-color: rgba(0, 0, 0, 0.1);
+        background-size: 100%;
+        transition: background 0s;
+    }
+    &.square span {
+        width: 20px;
+        height: 20px;
+    }
+    &.square {
+        width: 35px;
+        height: 35px;
+        border-radius: 50%;
 
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-	}
-	&:not(.square) {
-		padding: 5px 10px;
-		border-radius: 4px;
-	}
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    &:not(.square) {
+        padding: 5px 10px;
+        border-radius: 4px;
+    }
 `;

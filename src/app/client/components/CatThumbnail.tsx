@@ -1,174 +1,150 @@
-import React,{ SyntheticEvent } from 'react';
+import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import {
-	Button,
-	Card
-} from '../ui';
+import { Button, Card } from '../ui';
 
 interface ThumbnailProps {
-	picture: string;
-	name: string;
-	temperament: string;
-	description: string;
-	className: string;
+    picture: string;
+    name: string;
+    temperament: string;
+    description: string;
+    className: string;
 }
 
 const CatThumbnail = (props: ThumbnailProps) => {
-	const {
-		picture,
-		name,
-		description,
-		className,
-		temperament,
-	} = props;
+    const { picture, name, description, className, temperament } = props;
 
-	return (
-		<Card
-			className={className}
-			title={name}
-			picture={picture}
-			altText={`Breed: ${name}`}
-			body={(
-				<React.Fragment>
-					<div className="description">{description}</div>
-					<div className="like-section">
-						<Button square={true} backgroundColor={'coral'}>
-							<svg viewBox="0 0 24 24" aria-hidden="true">
-								<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
-							</svg>
-						</Button>
-					</div>
-				</React.Fragment>
-			)}
-		/>
-	);
+    return (
+        <Card
+            className={className}
+            title={name}
+            picture={picture}
+            altText={`Breed: ${name}`}
+            body={
+                <React.Fragment>
+                    <div className="description">{description}</div>
+                    <div className="like-section">
+                        <Button square={true} backgroundColor={'coral'}>
+                            <svg viewBox="0 0 24 24" aria-hidden="true">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+                            </svg>
+                        </Button>
+                    </div>
+                </React.Fragment>
+            }
+        />
+    );
 };
 
 export default styled(CatThumbnail)`
-	position: relative;
-	display: flex;
-	flex-direction: column;
-	box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
-		0px 1px 1px 0px rgba(0,0,0,0.14),
-		0px 1px 3px 0px rgba(0,0,0,0.12);
-		
-	background: white;
-	border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
 
-	.avatar {
-		width: 40px;
-		height: 40px;
-		display: flex;
-		overflow: hidden;
-		position: relative;
-		font-size: 1.25rem;
-		align-items: center;
-		flex-shrink: 0;
-		font-family: 'Roboto',
-		 'Helvetica',
-		 'Arial',
-		 sans-serif;
-		line-height: 1;
-		user-select: none;
-		border-radius: 50%;
-		justify-content: center;
-		margin-right: 13px;
-		background: coral;
-		color: white;
-	}
+    background: white;
+    border-radius: 4px;
 
-	.head {
-		display: flex;
-		align-items: center;
-	}
+    .avatar {
+        width: 40px;
+        height: 40px;
+        display: flex;
+        overflow: hidden;
+        position: relative;
+        font-size: 1.25rem;
+        align-items: center;
+        flex-shrink: 0;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        line-height: 1;
+        user-select: none;
+        border-radius: 50%;
+        justify-content: center;
+        margin-right: 13px;
+        background: coral;
+        color: white;
+    }
 
-	.like-section {
-		display: flex;
-		align-items: center;
-		font-size: 10px;
-		color: black;
-		margin-top: 10px;
-		button {
-			margin-right: 15px;
-		}
-	}
+    .head {
+        display: flex;
+        align-items: center;
+    }
 
-	.main {
-		font-size: 0.875rem;
-		font-family: 'Roboto',
-		 'Helvetica',
-		 'Arial',
-		 sans-serif;
-		font-weight: 400;
-		line-height: 1.43;
-		letter-spacing: 0.01071em;
-		width: 50%;
-		white-space: wrap;
-		color: black;
-	}
+    .like-section {
+        display: flex;
+        align-items: center;
+        font-size: 10px;
+        color: black;
+        margin-top: 10px;
+        button {
+            margin-right: 15px;
+        }
+    }
 
-	.body {
-		font-size: 0.875rem;
-		font-family: 'Roboto',
-		 'Helvetica',
-		 'Arial',
-		 sans-serif;
-		font-weight: 400;
-		line-height: 1.43;
-		letter-spacing: 0.01071em;
-		color: rgba(0,
-		 0,
-		 0,
-		 0.54);
-	}
+    .main {
+        font-size: 0.875rem;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 400;
+        line-height: 1.43;
+        letter-spacing: 0.01071em;
+        width: 50%;
+        white-space: wrap;
+        color: black;
+    }
 
-	.description {
-		height: 60px;
-		text-overflow: ellipsis;
-		overflow: hidden;
-	}
+    .body {
+        font-size: 0.875rem;
+        font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+        font-weight: 400;
+        line-height: 1.43;
+        letter-spacing: 0.01071em;
+        color: rgba(0, 0, 0, 0.54);
+    }
 
-	.picture {
-		width: 100%;
-		position: relative;
-		overflow: hidden;
-		padding-top: 80%;
-		cursor: pointer;
-	}
+    .description {
+        height: 60px;
+        text-overflow: ellipsis;
+        overflow: hidden;
+    }
 
-	img {
-		position: absolute;
-		width: 100%;
-		top: 0;
-		left: 0;
-		transform-origin: top center;
-		transition: opacity 0.5s ease-in;
-	}
+    .picture {
+        width: 100%;
+        position: relative;
+        overflow: hidden;
+        padding-top: 80%;
+        cursor: pointer;
+    }
 
-	&.animations-allowed {
-		img {
-			transition: all 0.5s ease-out;
-		}
-	}
+    img {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        left: 0;
+        transform-origin: top center;
+        transition: opacity 0.5s ease-in;
+    }
 
-	&.loading img,
-	
-	&.loading .body {
-		opacity: 0;
-	}
+    &.animations-allowed {
+        img {
+            transition: all 0.5s ease-out;
+        }
+    }
 
-	h4 {
-		margin: 0;
-	}
+    &.loading img,
+    &.loading .body {
+        opacity: 0;
+    }
 
-	.head,
-	
-	.body {
-		padding: 16px;
-	}
+    h4 {
+        margin: 0;
+    }
 
-	svg {
-		fill: white;
-	}
+    .head,
+    .body {
+        padding: 16px;
+    }
+
+    svg {
+        fill: white;
+    }
 `;
