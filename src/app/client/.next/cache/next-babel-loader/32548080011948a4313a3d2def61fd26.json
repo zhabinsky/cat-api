@@ -1,0 +1,1 @@
+{"ast":null,"code":"import Button from './Button';\nexport { Button };","map":{"version":3,"sources":["/Users/vladislavzhabinsky/coding/job-applications/telia/app/client/ui/index.tsx"],"names":["Button"],"mappings":"AAAA,OAAOA,MAAP,MAAmB,UAAnB;AAEA,SAAQA,MAAR","sourcesContent":["import Button from './Button'\n\nexport {Button}\n"]},"metadata":{},"sourceType":"module"}

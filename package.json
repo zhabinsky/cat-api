@@ -1,14 +1,13 @@
 {
-  "name": "telia-kittens",
+  "name": "cat-api",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "dev": "export NODE_ENV=dev && ts-node-dev --ignore-watch app/client --respawn --transpileOnly ./index.ts",
-    "build-fe": "cd build/app/client && rm -rf .next && next build",
-    "prepare-build-dir": "rm -rf build && mkdir build && mkdir -p build/app/client/public && cp .env build/.env && cp app/client/public/* build/app/client/public/",
-    "start": "npm run prepare-build-dir && tsc && export NODE_ENV=production && npm run build-fe && cd build && node index.js"
+    "build": "sh scripts/build.sh",
+    "start": "npm run build && npm run prod",
+    "dev": "sh scripts/dev.sh"
   },
   "keywords": [],
   "author": "Vlad Zhabinsky <vladislavzhabinsky@gmail.com>",
