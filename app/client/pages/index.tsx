@@ -1,17 +1,12 @@
 import React from 'react';
 import gq from '../api/gq';
-import {
-	GlobalStyles,
-	InfiniteBox,
-	CatThumbnail
-} from '../components';
+import { GlobalStyles,InfiniteBox,CatThumbnail } from '../components';
 
 const Page = () => (
-	<div>
+	<React.Fragment>
 		<GlobalStyles />
-		<h1>Hello</h1>
+		<h1>Cat API</h1>
 		<InfiniteBox
-			className=""
 			title={'Breeds'}
 			pageSize={12}
 			itemComponent={CatThumbnail}
@@ -19,10 +14,11 @@ const Page = () => (
 				items: breedMany (limit:${limit}, skip:${skip}) {
 					name
 					picture
+					description
 				}
 			}`}
 		/>
-	</div >
+	</React.Fragment>
 );
 
 Page.getInitialProps = async () => {

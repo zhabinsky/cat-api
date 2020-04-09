@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 import request from 'request';
 
 /** 
@@ -6,20 +7,24 @@ import request from 'request';
  * Is used when populating app with random data
  */
 
+const isProd = process.env.NODE_ENV === "production";
+
 export default function download(url: string,name: string) {
 	return new Promise((resolve,reject) => {
 		request(url,{ encoding: 'binary' },function(error: any,res: any,body: any) {
 
 			if(error) return reject(error);
 
-			const extension = contentTypeToExtension[res.headers['content-type']];
+			const contentType = res.headers['content-type'];
+			const extension = contentTypeToExtension[contentType];
 
-			if(!extension) return reject();
+			if(!extension) return reject('No extension found for content-type=' + contentType);
 
-			const filename = 'public-assets/' + name + extension;
+			const filename = name + extension;
+			const filePath = path.resolve(__dirname,isProd ? '../../../../public-assets/' : '../../../public-assets/',filename) as string;
 
-			fs.writeFile(filename,body,'binary',function(err) {
-				if(err) return reject();
+			fs.writeFile(filePath,body,'binary',function(err) {
+				if(err) return reject('Could not save' + err);
 
 				resolve(name + extension);
 			});
