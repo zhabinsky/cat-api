@@ -1,78 +1,58 @@
-import React, {SyntheticEvent} from 'react'
-import styled from 'styled-components'
-import classnames from 'classnames'
+import React,{ SyntheticEvent } from 'react';
+import styled from 'styled-components';
+import classnames from 'classnames';
+import {
+	Button,
+	Card
+} from '../ui';
 
 interface ThumbnailProps {
-	picture: string
-	name: string
-	temperament: string
-	description: string
-	className: string
+	picture: string;
+	name: string;
+	temperament: string;
+	description: string;
+	className: string;
 }
 
 const CatThumbnail = (props: ThumbnailProps) => {
-	const {picture, name, description, temperament, className} = props
-	/**
-	 * We check what orientation Image is to apply different
-	 * styling optinon to insure that the image covers the thumbnail fully
-	 *
-	 * For now, we will assume that the image is square
-	 */
-	const [size, setSize] = React.useState([1, 1])
-	const [isMouseOver, setMouseOver] = React.useState(false)
-
-	const [allowAnimations, setAllowAnimations] = React.useState(false)
-
-	// if image is horizontal, we scale it up to fill the container
-	const imageScale = (isMouseOver ? 0.08 : 0) + Math.max(size[0] / size[1] / 0.8, 1)
-	const imageUrl = `/public-assets/${picture}`
-	const isLoading = size[0] === 1
-
-	const onLoadedImage = (e: SyntheticEvent<HTMLImageElement, Event>) => {
-		const image = (e.target as unknown) as HTMLImageElement
-		const {width, height} = image
-		if (width === size[0] && width === size[1]) {
-			// image dimensions haven't changes
-			// no need to perform the update
-			return
-		}
-		setSize([width, height])
-	}
-
-	React.useEffect(() => {
-		// we will allow hovering animations when Image has finished loading
-		// and we know its dimensions, this is done to avoid flickering while resizing
-		if (!allowAnimations && !allowAnimations) {
-			setTimeout(() => setAllowAnimations(true), 500)
-		}
-	}, [isLoading])
+	const {
+		picture,
+		name,
+		description,
+		className,
+		temperament,
+	} = props;
 
 	return (
-		<article className={classnames(className, {hover: isMouseOver, loading: isLoading, 'animations-allowed': allowAnimations})} onMouseEnter={() => setMouseOver(true)} onMouseLeave={() => setMouseOver(false)}>
-			<div className="head">
-				<div className="avatar">
-					<span>{name[0]}</span>
-				</div>
-				<div className="title-block">
-					<span className="main">{name}</span>
-					<div>{temperament}</div>
-				</div>
-			</div>
-			<div className="picture">
-				<img style={{transform: `scale(${imageScale})`}} src={imageUrl} alt={`Breed: ${name}`} onLoad={onLoadedImage} />
-			</div>
-			<div className="body">
-				<div className="description">{description}</div>
-			</div>
-		</article>
-	)
-}
+		<Card
+			className={className}
+			title={name}
+			picture={picture}
+			altText={`Breed: ${name}`}
+			body={(
+				<React.Fragment>
+					<div className="description">{description}</div>
+					<div className="like-section">
+						<Button square={true} backgroundColor={'coral'}>
+							<svg viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
+							</svg>
+						</Button>
+					</div>
+				</React.Fragment>
+			)}
+		/>
+	);
+};
 
 export default styled(CatThumbnail)`
 	position: relative;
 	display: flex;
 	flex-direction: column;
-	box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 1px 3px 0px rgba(0, 0, 0, 0.12);
+	box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2),
+		0px 1px 1px 0px rgba(0,0,0,0.14),
+		0px 1px 3px 0px rgba(0,0,0,0.12);
+		
 	background: white;
 	border-radius: 4px;
 
@@ -85,13 +65,16 @@ export default styled(CatThumbnail)`
 		font-size: 1.25rem;
 		align-items: center;
 		flex-shrink: 0;
-		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+		font-family: 'Roboto',
+		 'Helvetica',
+		 'Arial',
+		 sans-serif;
 		line-height: 1;
 		user-select: none;
 		border-radius: 50%;
 		justify-content: center;
 		margin-right: 13px;
-		background: red;
+		background: coral;
 		color: white;
 	}
 
@@ -100,9 +83,23 @@ export default styled(CatThumbnail)`
 		align-items: center;
 	}
 
+	.like-section {
+		display: flex;
+		align-items: center;
+		font-size: 10px;
+		color: black;
+		margin-top: 10px;
+		button {
+			margin-right: 15px;
+		}
+	}
+
 	.main {
 		font-size: 0.875rem;
-		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+		font-family: 'Roboto',
+		 'Helvetica',
+		 'Arial',
+		 sans-serif;
 		font-weight: 400;
 		line-height: 1.43;
 		letter-spacing: 0.01071em;
@@ -113,11 +110,17 @@ export default styled(CatThumbnail)`
 
 	.body {
 		font-size: 0.875rem;
-		font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+		font-family: 'Roboto',
+		 'Helvetica',
+		 'Arial',
+		 sans-serif;
 		font-weight: 400;
 		line-height: 1.43;
 		letter-spacing: 0.01071em;
-		color: rgba(0, 0, 0, 0.54);
+		color: rgba(0,
+		 0,
+		 0,
+		 0.54);
 	}
 
 	.description {
@@ -150,6 +153,7 @@ export default styled(CatThumbnail)`
 	}
 
 	&.loading img,
+	
 	&.loading .body {
 		opacity: 0;
 	}
@@ -159,7 +163,12 @@ export default styled(CatThumbnail)`
 	}
 
 	.head,
+	
 	.body {
 		padding: 16px;
 	}
-`
+
+	svg {
+		fill: white;
+	}
+`;
