@@ -35,6 +35,28 @@ schemaComposer.Query.addFields({
     breedPagination: BreedTC.getResolver('pagination'),
 });
 
+BreedTC.addResolver({
+    name: 'vote',
+    type: BreedTC,
+    args: { _id: 'String' },
+    resolve: async ({ source, args, context, info }) => {
+        try {
+            const result = await Models.Breed.Model.findOneAndUpdate(
+                { _id: args._id },
+                { $inc: { votes: 1 } },
+                { new: true },
+            );
+            return result;
+        } catch (e) {
+            throw Error(e);
+        }
+    },
+});
+
+schemaComposer.Mutation.addFields({
+    vote: BreedTC.getResolver('vote'),
+});
+
 /**
  * This resource explained how to build a relation
  * https://github.com/graphql-compose/graphql-compose-mongoose#how-to-build-nestingrelations

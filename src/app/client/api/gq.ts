@@ -27,7 +27,7 @@ export default async (request: string) => {
     if (!result || result.errors) {
         console.log('Error while fetching GQ', { result });
 
-        return {};
+        throw Error('result.errors' + result.errors);
     }
 
     return result.data;

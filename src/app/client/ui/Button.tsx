@@ -8,12 +8,22 @@ interface Props {
     ripple?: boolean;
     square?: boolean;
     backgroundColor?: string;
+    onClick?: (e: React.MouseEvent<HTMLElement>) => void;
 }
 
 const Button: FunctionComponent<Props> = (props: Props) => {
-    const { className, children, ripple = true, square = false } = props;
+    const {
+        className,
+        children,
+        onClick,
+        ripple = true,
+        square = false,
+    } = props;
     return (
-        <button className={classnames(className, { ripple, square })}>
+        <button
+            className={classnames(className, { ripple, square })}
+            onClick={onClick}
+        >
             <span>{children}</span>
         </button>
     );

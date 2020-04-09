@@ -12,9 +12,11 @@ const Page = () => (
             itemComponent={CatThumbnail}
             createQuery={(skip: number, limit: number) => `{
 				items: breedMany (limit:${limit}, skip:${skip}) {
-					name
+                    _id
+                    name
 					picture
-					description
+                    description
+                    votes
 				}
 			}`}
         />

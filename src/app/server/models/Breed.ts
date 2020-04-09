@@ -4,6 +4,10 @@ const Schema = new mongoose.Schema({
     name: String,
     description: String,
     picture: String,
+    votes: {
+        type: Number,
+        default: 0,
+    },
     temperament: {
         type: String,
         enum: 'lazy|active|cuddly|playful'.split('|'),
