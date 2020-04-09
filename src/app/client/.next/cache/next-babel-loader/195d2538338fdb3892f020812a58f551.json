@@ -1,1 +1,0 @@
-{"ast":null,"code":"import GlobalStyles from './GlobalStyles';\nimport CatThumbnail from './CatThumbnail';\nimport InfiniteBox from './InfiniteBox';\nexport { GlobalStyles, CatThumbnail, InfiniteBox };","map":null,"metadata":{},"sourceType":"module"}
