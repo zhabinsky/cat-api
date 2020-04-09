@@ -7,7 +7,7 @@
     "tsc": "tsc",
     "dev": "export NODE_ENV=dev && ts-node-dev --ignore-watch app/client --respawn --transpileOnly ./index.ts",
     "build-fe": "cd build/app/client && rm -rf .next && next build",
-    "prepare-build-dir": "rm -rf build && mkdir build && cp .env build/.env && cp app/client/public/ build/client/public/",
+    "prepare-build-dir": "rm -rf build && mkdir build && mkdir -p build/client/public && cp .env build/.env && cp app/client/public/* build/client/public/",
     "start": "npm run prepare-build-dir && tsc && export NODE_ENV=production && npm run build-fe && cd build && node index.js"
   },
   "keywords": [],
