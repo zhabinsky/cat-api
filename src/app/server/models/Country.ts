@@ -7,4 +7,9 @@ const Schema = new mongoose.Schema({
 
 const Model = mongoose.model('Country', Schema);
 
-export { Schema, Model };
+export default { Schema, Model };
+
+export interface CountryObject extends Document {
+    name: string;
+    capital: string;
+}

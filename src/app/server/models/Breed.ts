@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose, { Document } from 'mongoose';
 
 const Schema = new mongoose.Schema({
     name: String,
@@ -20,4 +20,13 @@ const Schema = new mongoose.Schema({
 
 const Model = mongoose.model('Breed', Schema);
 
-export { Schema, Model };
+export default { Schema, Model };
+
+export interface BreedDocument extends Document {
+    name: string;
+    description: string;
+    picture: string;
+    votes: number;
+    temperament: string;
+    origin: string;
+}

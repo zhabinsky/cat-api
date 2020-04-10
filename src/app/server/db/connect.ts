@@ -18,7 +18,7 @@ const connect = async () => {
         });
 
         db.once('open', () => {
-            console.ok('DB Connection OK ' + CONNECTION_URI);
+            console.notify('DB Connection OK ' + CONNECTION_URI);
             resolve();
         });
     });

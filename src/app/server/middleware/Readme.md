@@ -1,6 +1,6 @@
 ## Structure
 
-I find it convenient to organise all the enpoints of my application under the name "middleware".
+It is convenient to organise all the enpoints of our application under the name "middleware".
 Every module in this directory exports an array of middlewares:
 
 ```

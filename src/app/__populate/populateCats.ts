@@ -1,5 +1,5 @@
 import download from '../server/utils/download';
-import * as Models from '../server/models';
+import Models from '../server/models';
 import { LoremIpsum } from 'lorem-ipsum';
 import getRandomWord from './getRandomWord';
 import chalk from 'chalk';

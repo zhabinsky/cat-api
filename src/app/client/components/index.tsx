@@ -1,5 +1,4 @@
-import GlobalStyles from './GlobalStyles';
 import CatThumbnail from './CatThumbnail';
-import InfiniteBox from './InfiniteBox';
+import LazyGrid from './LazyGrid';
 
-export { GlobalStyles, CatThumbnail, InfiniteBox };
+export { CatThumbnail, LazyGrid };

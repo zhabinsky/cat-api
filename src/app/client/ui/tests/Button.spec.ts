@@ -11,7 +11,7 @@ import { shallow } from 'enzyme';
 import React from 'react';
 import expect from 'expect.js';
 
-import Button from './Button';
+import Button from '../Button';
 
 describe('Component Test: ui/Button', () => {
     const testString = 'oer2304u29489u52934590348y52845892345234592h345';

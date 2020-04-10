@@ -1,36 +1,34 @@
 import React from 'react';
-import gq from '../api/gq';
-import { GlobalStyles, InfiniteBox, CatThumbnail } from '../components';
+import { LazyGrid, CatThumbnail } from '../components';
+import { ConstrainWidth } from '../ui';
+import { PageDecorator } from '../decorators';
+import { CreateQueryFunction } from '../components/LazyGrid';
+
+const createBreedsQuery = ((search: string, skip: number, limit: number) => `{
+    totalCount: breedCount
+    items: breedSearch (search:"${search}", limit:${limit}, skip:${skip}) {
+        _id
+        name
+        picture
+        description
+        votes
+        origin {
+            name
+        }
+    }
+}`) as CreateQueryFunction;
 
 const Page = () => (
-    <React.Fragment>
-        <GlobalStyles />
-        <h1>Cat API</h1>
-        <InfiniteBox
-            title={'Breeds'}
-            pageSize={12}
-            itemComponent={CatThumbnail}
-            createQuery={(skip: number, limit: number) => `{
-				items: breedMany (limit:${limit}, skip:${skip}) {
-                    _id
-                    name
-					picture
-                    description
-                    votes
-				}
-			}`}
-        />
-    </React.Fragment>
+    <PageDecorator>
+        <ConstrainWidth>
+            <LazyGrid
+                className="cats"
+                pageSize={12}
+                itemComponent={CatThumbnail}
+                createQuery={createBreedsQuery}
+            />
+        </ConstrainWidth>
+    </PageDecorator>
 );
-
-Page.getInitialProps = async () => {
-    const data = await gq(`{
-		breedCount
-		countryCount
-	}`);
-    return {
-        data,
-    };
-};
 
 export default Page;

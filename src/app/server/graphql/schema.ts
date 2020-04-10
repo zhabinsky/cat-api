@@ -1,90 +1,45 @@
 /**
+ * Library used to compose GraphQL schema from mongoose Schemas
  * https://www.npmjs.com/package/graphql-compose-mongoose
  *
- * Library used to compose GraphQL schema from mongoose Schemas
+ * Information on how to build a nested relation query
+ * https://github.com/graphql-compose/graphql-compose-mongoose#how-to-build-nestingrelations
+ *
  */
 
-import { composeWithMongoose } from 'graphql-compose-mongoose/node8';
+import TypeComposers from './type-composers';
+import './custom-resolvers';
 import { schemaComposer } from 'graphql-compose';
-import * as Models from '../models';
 
-const customizationOptions = {};
+const { Country, Breed } = TypeComposers;
 
-const CountryTC = composeWithMongoose(
-    Models.Country.Model,
-    customizationOptions,
-);
-schemaComposer.Query.addFields({
-    countryById: CountryTC.getResolver('findById'),
-    countryByIds: CountryTC.getResolver('findByIds'),
-    countryOne: CountryTC.getResolver('findOne'),
-    countryMany: CountryTC.getResolver('findMany'),
-    countryCount: CountryTC.getResolver('count'),
-    countryConnection: CountryTC.getResolver('connection'),
-    countryPagination: CountryTC.getResolver('pagination'),
-});
+const queries = {
+    countryOne: Country.getResolver('findOne'),
+    countryMany: Country.getResolver('findMany'),
+    countryCount: Country.getResolver('count'),
+    breedOne: Breed.getResolver('findOne'),
+    breedMany: Breed.getResolver('findMany'),
+    breedCount: Breed.getResolver('count'),
+    breedSearch: Breed.getResolver('search'),
+    // countryById: Country.getResolver('findById'),
+    // countryByIds: Country.getResolver('findByIds'),
+    // countryConnection: Country.getResolver('connection'),
+    // countryPagination: Country.getResolver('pagination'),
+    // breedById: Breed.getResolver('findById'),
+    // breedByIds: Breed.getResolver('findByIds'),
+    // breedConnection: Breed.getResolver('connection'),
+    // breedPagination: Breed.getResolver('pagination'),
+};
 
-const BreedTC = composeWithMongoose(Models.Breed.Model, customizationOptions);
-schemaComposer.Query.addFields({
-    breedById: BreedTC.getResolver('findById'),
-    breedByIds: BreedTC.getResolver('findByIds'),
-    breedOne: BreedTC.getResolver('findOne'),
-    breedMany: BreedTC.getResolver('findMany'),
-    breedCount: BreedTC.getResolver('count'),
-    breedConnection: BreedTC.getResolver('connection'),
-    breedPagination: BreedTC.getResolver('pagination'),
-});
-
-BreedTC.addResolver({
-    name: 'vote',
-    type: BreedTC,
-    args: { _id: 'String' },
-    resolve: async ({ source, args, context, info }) => {
-        try {
-            const result = await Models.Breed.Model.findOneAndUpdate(
-                { _id: args._id },
-                { $inc: { votes: 1 } },
-                { new: true },
-            );
-            return result;
-        } catch (e) {
-            throw Error(e);
-        }
-    },
-});
-
-schemaComposer.Mutation.addFields({
-    vote: BreedTC.getResolver('vote'),
-});
+const mutations = {
+    vote: Breed.getResolver('vote'),
+};
 
 /**
- * This resource explained how to build a relation
- * https://github.com/graphql-compose/graphql-compose-mongoose#how-to-build-nestingrelations
+ * Here we define our GQ QUERIES and MUTATIONS
  */
+schemaComposer.Query.addFields(queries);
+schemaComposer.Mutation.addFields(mutations);
+const schema = schemaComposer.buildSchema();
 
-interface Breed {
-    origin: string;
-}
-
-BreedTC.addRelation('origin', {
-    resolver: () => CountryTC.getResolver('findById'),
-    prepareArgs: { _id: (breed: Breed) => breed.origin },
-    projection: { origin: 1 }, // required fields from source object
-});
-
-CountryTC.addRelation('breeds', {
-    resolver: () => BreedTC.get('$findMany'), // shorthand for `UserTC.getResolver('findMany')`
-    prepareArgs: {
-        filter: (source: Breed) => ({
-            _operators: {
-                _id: source.origin,
-            },
-        }),
-        limit: 5,
-    },
-    projection: { origin: 1 }, // required fields from source object
-});
-
-const graphqlSchema = schemaComposer.buildSchema();
-
-export default graphqlSchema;
+export default schema;

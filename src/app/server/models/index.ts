@@ -1,4 +1,4 @@
-import * as Country from './Country';
-import * as Breed from './Breed';
+import Country from './Country';
+import Breed from './Breed';
 
-export { Country, Breed };
+export default { Country, Breed };

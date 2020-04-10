@@ -5,7 +5,6 @@ import path from 'path';
 const dev = process.env.NODE_ENV !== 'production';
 const dir = path.resolve(__dirname, '../../client');
 
-console.log({ dev, dir });
 const app = next({ dev, dir });
 const handle = app.getRequestHandler();
 

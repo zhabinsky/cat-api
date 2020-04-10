@@ -1,4 +1,4 @@
-import * as Models from '../server/models';
+import Models from '../server/models';
 
 export default async () => {
     const count = await Models.Country.Model.countDocuments();

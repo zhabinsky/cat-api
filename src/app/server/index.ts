@@ -22,7 +22,7 @@ async function init() {
             console.error(err);
             return process.exit(1);
         }
-        console.ok('App listening @ http://localhost:' + PORT);
+        console.notify('App listening @ http://localhost:' + PORT);
     });
 }
 
