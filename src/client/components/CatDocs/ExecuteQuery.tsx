@@ -40,21 +40,22 @@ const ExecuteQuery: FunctionComponent<Props> = (props: Props) => {
                 Execute query <Icon />
             </Button>
             <div className="response">
-                {[['Response', response], ['Error', error]].map(
-                    ([title, data]) => {
-                        if (typeof data === 'object' && !data) return null;
-                        return (
-                            <React.Fragment key={title}>
-                                <strong>
-                                    {title} in {responseTime}ms
-                                </strong>
-                                <div className={'data data--' + title}>
-                                    {JSON.stringify(data, null, 2)}
-                                </div>
-                            </React.Fragment>
-                        );
-                    },
-                )}
+                {[
+                    ['Response', response],
+                    ['Error', error],
+                ].map(([title, data]) => {
+                    if (typeof data === 'object' && !data) return null;
+                    return (
+                        <React.Fragment key={title}>
+                            <strong>
+                                {title} in {responseTime}ms
+                            </strong>
+                            <div className={'data data--' + title}>
+                                {JSON.stringify(data, null, 2)}
+                            </div>
+                        </React.Fragment>
+                    );
+                })}
             </div>
         </div>
     );

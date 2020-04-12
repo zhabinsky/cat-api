@@ -26,14 +26,10 @@ const Page = ({ className, cat, error = false }) => {
 
             <NextSeo
                 title={`${cat.name} | Cat API`}
-                description={`View "${
-                    cat.name
-                }" and learn how to retrieve this breed from the API`}
+                description={`View "${cat.name}" and learn how to retrieve this breed from the API`}
                 openGraph={{
                     title: `Check breed "${cat.name}"`,
-                    description: `View "${
-                        cat.name
-                    }" and learn how to retrieve this breed from the API`,
+                    description: `View "${cat.name}" and learn how to retrieve this breed from the API`,
                     images: [{ url: cat.picture }],
                     site_name: 'CAT API',
                 }}
@@ -80,7 +76,7 @@ const PageStyled = styled(Page)`
     }
 ` as NextPage;
 
-PageStyled.getInitialProps = async context => {
+PageStyled.getInitialProps = async (context) => {
     try {
         const _id = ((context.req as unknown) as Request).path.replace(
             '/cat/',

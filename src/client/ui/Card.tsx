@@ -33,10 +33,12 @@ const Card: FunctionComponent<Props> = (props: Props) => {
                     <div className="avatar">{title[0]}</div>
                     <div className="title">{title}</div>
                 </div>
-                <div
-                    className="picture"
-                    style={{ backgroundImage: `url(${imageUrl})` }}
-                />
+                <div className="picture-container">
+                    <div
+                        className="picture"
+                        style={{ backgroundImage: `url(${imageUrl})` }}
+                    />
+                </div>
             </Link>
             <div className="body">{props.body}</div>
         </article>
@@ -52,14 +54,27 @@ export default styled(Card)`
     background: white;
     border-radius: 4px;
 
-    .picture {
-        width: 100%;
+    .picture-container {
         position: relative;
+        width: 100%;
         overflow: hidden;
         padding-top: 80%;
         cursor: pointer;
-        background: rgba(0, 0, 0, 0.1);
-        background-size: cover;
+
+        .picture {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+
+            background: rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            transition: transform 0.5s ease-out;
+            :hover {
+                transform: scale(1.08);
+            }
+        }
     }
 
     .avatar {
@@ -99,14 +114,5 @@ export default styled(Card)`
         color: rgba(0, 0, 0, 0.54);
         padding: 16px;
         position: relative;
-    }
-
-    img {
-        position: absolute;
-        width: 100%;
-        top: 0;
-        left: 0;
-        transform-origin: top left;
-        transition: opacity 0.5s ease-in;
     }
 `;

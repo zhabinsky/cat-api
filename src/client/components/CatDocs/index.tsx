@@ -18,7 +18,7 @@ const prepareQueryDocs = (title, query) => {
     };
 };
 
-const CatDocs = props => {
+const CatDocs = (props) => {
     const { className, catId } = props;
 
     const instructions = [
@@ -38,7 +38,7 @@ const CatDocs = props => {
             <h2>Tiny documentation 😸</h2>
             <Accordion>
                 {[
-                    ...instructions.map(e => ({
+                    ...instructions.map((e) => ({
                         title: e.title,
                         content: (
                             <pre>
