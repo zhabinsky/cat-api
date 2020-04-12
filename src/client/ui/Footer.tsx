@@ -41,5 +41,8 @@ export default styled(Footer)`
     .credits {
         color: black;
         opacity: 0.6;
+        a {
+            text-decoration: underline;
+        }
     }
 `;

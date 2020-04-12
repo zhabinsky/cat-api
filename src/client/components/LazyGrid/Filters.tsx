@@ -6,6 +6,7 @@ const Filters = styled((props: LazyGridFiltersProps) => {
     return (
         <div className={className}>
             <input
+                title="Search breeds by name"
                 type="text"
                 alt="Search the search"
                 placeholder="Search..."

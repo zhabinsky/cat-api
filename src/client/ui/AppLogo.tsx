@@ -6,18 +6,21 @@ interface Props {
     className?: string;
 }
 
-const AppLogo: FunctionComponent<Props> = (props) => (
+const AppLogo: FunctionComponent<Props> = props => (
     <Link href="/">
-        <div {...props}>
+        <h1 {...props}>
             <span>cat</span>
             <span>api</span>
-        </div>
+        </h1>
     </Link>
 );
 
 export default styled(AppLogo)`
-    align-items: center;
+    margin: 0;
+    padding: 0;
     display: flex;
+    align-items: center;
+
     span:first-child {
         font-size: 32px;
         font-weight: 900;

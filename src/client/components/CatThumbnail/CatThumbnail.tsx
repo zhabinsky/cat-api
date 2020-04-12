@@ -36,6 +36,7 @@ const CatThumbnail = (props: ThumbnailProps) => {
 
     return (
         <Card
+            aria-label={`Cat breed "${name}"`}
             url={`/cat/${_id}`}
             className={`cat-thumbnail ${className}`}
             title={name}

@@ -5,6 +5,7 @@ import { Link } from '../ui';
 
 interface Props {
     className?: string;
+    ariaLabel?: string;
     children?: any;
     body?: any;
     picture: string;
@@ -14,7 +15,7 @@ interface Props {
 }
 
 const Card: FunctionComponent<Props> = (props: Props) => {
-    const { picture, title, url, className } = props;
+    const { picture, title, url, className, ...rest } = props;
     const [hovered, setMouseOver] = React.useState(false);
 
     const imageUrl = `/public-assets/${picture}`;
@@ -24,6 +25,7 @@ const Card: FunctionComponent<Props> = (props: Props) => {
 
     return (
         <article
+            {...rest}
             className={cardClassNames}
             onMouseEnter={() => setMouseOver(true)}
             onMouseLeave={() => setMouseOver(false)}
@@ -111,7 +113,7 @@ export default styled(Card)`
         font-weight: 400;
         line-height: 1.43;
         letter-spacing: 0.01071em;
-        color: rgba(0, 0, 0, 0.54);
+        color: rgba(0, 0, 0, 0.7);
         padding: 16px;
         position: relative;
     }
