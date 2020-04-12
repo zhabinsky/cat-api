@@ -1,4 +1,5 @@
 import nodeFetch, { Body } from 'node-fetch';
+import { NotificationManager } from 'react-notifications';
 
 const isServer = typeof window === 'undefined';
 
@@ -19,7 +20,17 @@ const gq = async (request: string) => {
         return e.json() as Promise<object>;
     })) as GQResponse;
 
-    if (!result || result.errors) {
+    if (!result) {
+        throw result;
+    }
+
+    if (result.errors) {
+        if (!isServer) {
+            result.errors.forEach(({ message }) =>
+                NotificationManager.error(message, 'Oops..'),
+            );
+        }
+
         throw result;
     }
 
@@ -29,10 +40,14 @@ const gq = async (request: string) => {
 export default gq as GQRequestFunction;
 
 export interface GQResponse {
-    errors: object[] | undefined;
+    errors: GQError[];
     data: object;
 }
 
 export interface GQRequestFunction {
     (r: string): Promise<object>;
+}
+
+export interface GQError {
+    message: string;
 }

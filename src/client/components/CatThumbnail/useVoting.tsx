@@ -1,5 +1,6 @@
 import React from 'react';
 import gq from '../../api/gq';
+import { NotificationManager } from 'react-notifications';
 
 const prettyPrintVotes = (votes: number) => {
     if (votes === 0) {
@@ -16,7 +17,7 @@ const prettyPrintVotes = (votes: number) => {
 
 export default (_id: string, votesInit: number) => {
     const [votes, set] = React.useState(votesInit);
-    const alterVotes = (delta) => set(Math.max(votesInit, votes + delta));
+    const alterVotes = delta => set(Math.max(votesInit, votes + delta));
     const addVote = async () => {
         // we assume the vote will be counted
         alterVotes(1);
@@ -28,7 +29,9 @@ export default (_id: string, votesInit: number) => {
                         votes
                     }
                 }
-            `);
+            `).then(() =>
+                NotificationManager.success('Thank you for the vote!', 'Meow'),
+            );
         } catch (err) {
             // our assumption was wrong, reverting likes
             alterVotes(-1);

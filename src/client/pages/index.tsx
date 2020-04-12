@@ -11,7 +11,7 @@ import { NextSeo } from 'next-seo';
 
 const PAGE_SIZE = 12;
 
-const fetchBreeds = async (search: string, skip: number, limit: number) => {
+const fetchBreeds = ((async (search: string, skip: number, limit: number) => {
     const response = await gq(`{
         totalCount: breedCount
         items: breedSearch (search:"${search}", limit:${limit}, skip:${skip}) {
@@ -25,9 +25,8 @@ const fetchBreeds = async (search: string, skip: number, limit: number) => {
             }
         }
     }`);
-
     return (response as GQResponse).data as LazyGridResponse;
-};
+}) as unknown) as FetchItemsFunction;
 
 const Page = ({ breedsInitial }) => (
     <PageDecorator>
@@ -36,12 +35,11 @@ const Page = ({ breedsInitial }) => (
                 className="cats"
                 pageSize={PAGE_SIZE}
                 itemComponent={CatThumbnail}
-                fetchItems={(fetchBreeds as unknown) as FetchItemsFunction}
-                initialData={breedsInitial as LazyGridResponse}
+                fetchItems={fetchBreeds}
+                initialData={breedsInitial}
                 aria-label="Cat breeds"
             />
         </ConstrainWidth>
-
         <NextSeo
             title={`${breedsInitial.totalCount} cat breeds | Cat API`}
             description={`API that allows you to fetch random cat breeds`}
