@@ -2,22 +2,27 @@ import classnames from 'classnames';
 import debounce from 'lodash.debounce';
 import React from 'react';
 import styled from 'styled-components';
-import gq from '../../api/gq';
 import { PrettyError } from '../../ui';
 import Filters from './Filters';
 
 const LazyGrid = (props: LazyGridProps) => {
     const {
         className,
-        createQuery,
+        fetchItems,
         pageSize,
         itemComponent: ItemComponent,
+        initialData = {
+            items: [],
+            totalCount: 0,
+        },
     } = props;
 
-    const [items, setItems] = React.useState([]);
+    const [items, setItems] = React.useState(initialData.items);
     const [isLoading, setIsLoading] = React.useState(false);
     const [hasLoadedAll, setHasLoadedAll] = React.useState(false);
-    const [totalCountItems, setTotalCountItems] = React.useState(0);
+    const [totalCountItems, setTotalCountItems] = React.useState(
+        initialData.totalCount,
+    );
     const [search, setSearch] = React.useState('');
 
     const loadMore = async (
@@ -28,11 +33,12 @@ const LazyGrid = (props: LazyGridProps) => {
     ) => {
         setIsLoading(true);
 
-        const response = (await gq(
-            createQuery(searchValue, skipItems, limitItems),
-        )) as LazyGridResponse;
+        const response = await fetchItems(searchValue, skipItems, limitItems);
 
-        const { items: newItems, totalCount } = response;
+        const {
+            items: newItems,
+            totalCount,
+        } = (response as unknown) as LazyGridResponse;
 
         let newStateItems = newItems;
         if (append) {
@@ -119,7 +125,7 @@ const LazyGrid = (props: LazyGridProps) => {
     );
 };
 
-const LazyGridStyled = styled(LazyGrid)`
+export default styled(LazyGrid)`
     .items {
         width: 100%;
         display: grid;
@@ -172,14 +178,11 @@ const LazyGridStyled = styled(LazyGrid)`
         animation: animation-rotate 1s ease-out infinite;
     }
 `;
-LazyGridStyled.displayName = 'LazyGrid';
-
-export default LazyGridStyled;
 
 // Lazy load logic inspired by: https://alligator.io/react/react-infinite-scroll/
 
-export interface CreateQueryFunction {
-    (search: string, skip: number, limit: number): string;
+export interface FetchItemsFunction {
+    (search: string, skip: number, limit: number): Promise<LazyGridProps>;
 }
 
 export interface LazyGridResponse {
@@ -191,5 +194,6 @@ export interface LazyGridProps {
     pageSize: number;
     className?: string;
     itemComponent: Function;
-    createQuery: CreateQueryFunction;
+    fetchItems: FetchItemsFunction;
+    initialData: LazyGridResponse;
 }

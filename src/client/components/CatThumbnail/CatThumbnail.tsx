@@ -62,7 +62,7 @@ const CatThumbnail = (props: ThumbnailProps) => {
     );
 };
 
-const CatThumbnailStyled = styled(CatThumbnail)`
+export default styled(CatThumbnail)`
     user-select: none;
 
     .origin {
@@ -112,7 +112,3 @@ const CatThumbnailStyled = styled(CatThumbnail)`
         }
     }
 `;
-
-CatThumbnailStyled.displayName = 'CatThumbnail';
-
-export default CatThumbnailStyled;

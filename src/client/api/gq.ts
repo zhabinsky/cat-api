@@ -3,7 +3,7 @@ import nodeFetch, { Body } from 'node-fetch';
 const isServer = typeof window === 'undefined';
 
 const GRAPH_QL_ENPOINT = isServer
-    ? `http://localhost:${8081}/graphql`
+    ? `http://localhost:${8032}/graphql`
     : '/graphql';
 
 interface GQResponse {
