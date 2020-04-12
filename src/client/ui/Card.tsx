@@ -10,12 +10,11 @@ interface Props {
     body?: any;
     picture: string;
     title: string;
-    altText: string;
     url: string;
 }
 
 const Card: FunctionComponent<Props> = (props: Props) => {
-    const { picture, title, url, className, ...rest } = props;
+    const { picture, title, url, className, body, ...rest } = props;
     const [hovered, setMouseOver] = React.useState(false);
 
     const imageUrl = `/public-assets/${picture}`;
@@ -42,7 +41,7 @@ const Card: FunctionComponent<Props> = (props: Props) => {
                     />
                 </div>
             </Link>
-            <div className="body">{props.body}</div>
+            <div className="body">{body}</div>
         </article>
     );
 };

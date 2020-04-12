@@ -17,7 +17,7 @@ export default styled.div`
     position: absolute;
     width: 100%;
     z-index: -1;
-    ::after {
+    &::after {
         background: #f5f5f5;
         content: ' ';
         height: 300px;

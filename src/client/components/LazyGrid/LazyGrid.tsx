@@ -15,6 +15,7 @@ const LazyGrid = (props: LazyGridProps) => {
             items: [],
             totalCount: 0,
         },
+        ...rest
     } = props;
 
     const [items, setItems] = React.useState(initialData.items);
@@ -91,7 +92,10 @@ const LazyGrid = (props: LazyGridProps) => {
                     loadMore(input, 0, pageSize, false);
                 }}
             />
-            <section className={classnames(className, { loading: isLoading })}>
+            <section
+                className={classnames(className, { loading: isLoading })}
+                {...rest}
+            >
                 <div className="items">
                     {items.map((item, i) => (
                         <div className="item" key={i}>

@@ -38,6 +38,7 @@ const Page = ({ breedsInitial }) => (
                 itemComponent={CatThumbnail}
                 fetchItems={(fetchBreeds as unknown) as FetchItemsFunction}
                 initialData={breedsInitial as LazyGridResponse}
+                aria-label="Cat breeds"
             />
         </ConstrainWidth>
 

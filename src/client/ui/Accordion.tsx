@@ -38,36 +38,36 @@ export default styled(Accordion)`
         margin: 0;
     }
 
-    i {
-        position: absolute;
-        top: 20px;
-        right: 15px;
-        ${transition}
-
-        &:before,
-        &:after {
-            content: '';
-            position: absolute;
-            background-color: red;
-            width: 3px;
-            height: 9px;
-            ${transition}
-        }
-
-        &:before {
-            transform: translate(-2px, 0) rotate(45deg);
-        }
-
-        &:after {
-            transform: translate(2px, 0) rotate(-45deg);
-        }
-    }
-
     li {
         position: relative;
         padding: 0;
         margin: 0;
         border-top: 1px dotted rgba(0, 0, 0, 0.1);
+
+        > i {
+            position: absolute;
+            top: 20px;
+            right: 15px;
+            ${transition}
+
+            &::before,
+                &::after {
+                content: '';
+                position: absolute;
+                width: 3px;
+                height: 9px;
+                ${transition}
+            }
+
+            &::before {
+                transform: translate(-2px, 0) rotate(45deg);
+            }
+
+            &::after {
+                transform: translate(2px, 0) rotate(-45deg);
+            }
+        }
+
         h3 {
             z-index: 9999;
             line-height: 34px;
@@ -109,10 +109,10 @@ export default styled(Accordion)`
             }
 
             & ~ i {
-                &:before {
+                &::before {
                     transform: translate(2px, 0) rotate(45deg);
                 }
-                &:after {
+                &::after {
                     transform: translate(-2px, 0) rotate(-45deg);
                 }
             }

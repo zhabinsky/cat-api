@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Card, Ripples } from '../../ui';
+import { Button, Card } from '../../ui';
 import useVoting from './useVoting';
 import { FaHeart } from 'react-icons/fa';
 
@@ -41,21 +41,19 @@ const CatThumbnail = (props: ThumbnailProps) => {
             className={`cat-thumbnail ${className}`}
             title={name}
             picture={picture}
-            altText={`Breed: ${name}`}
             body={
                 <>
                     <div className="origin">{origin.name}</div>
                     <div className="description">{description}</div>
                     <div className="like-section">
-                        <Ripples>
-                            <Button
-                                onClick={(e: React.MouseEvent<HTMLElement>) => {
-                                    addVote();
-                                }}
-                            >
-                                <FaHeart />
-                            </Button>
-                        </Ripples>
+                        <Button
+                            aria-label={`Vote for breed "${name}"`}
+                            onClick={(e: React.MouseEvent<HTMLElement>) => {
+                                addVote();
+                            }}
+                        >
+                            <FaHeart />
+                        </Button>
                         <div className="voices">{votesStatus}</div>
                     </div>
                 </>
