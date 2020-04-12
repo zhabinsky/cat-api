@@ -12,7 +12,7 @@ const Accordion: FunctionComponent<Props> = (props: Props) => {
                 {children.map(({ title, content }, index) => {
                     return (
                         <li key={index + title}>
-                            <input type="checkbox" defaultChecked={index > 0} />
+                            <input type="checkbox" defaultChecked={true} />
                             <i />
                             <h3>{title}</h3>
                             <div className="accordion-item">{content}</div>
