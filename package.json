@@ -10,12 +10,14 @@
         "dev": "sh scripts/dev.sh",
         "format": "prettier \"src/**/*.ts\" \"src/**/*.tsx\" --write",
         "lint": "tslint src/**/*.ts --fix",
-        "test": "NODE_ENV=test && mocha -r ts-node/register src/**/**/*.spec.ts"
+        "test": "NODE_ENV=test && mocha -r ts-node/register src/**/**/*.spec.ts",
+        "analyze": "cd src/client && cross-env ANALYZE=true next build"
     },
     "keywords": [],
     "author": "Vlad Zhabinsky <vladislavzhabinsky@gmail.com>",
     "license": "ISC",
     "dependencies": {
+        "@next/bundle-analyzer": "^9.3.4",
         "@types/react": "^16.9.32",
         "@types/request": "^2.48.4",
         "@types/styled-components": "^5.0.1",
