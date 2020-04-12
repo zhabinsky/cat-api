@@ -55,7 +55,7 @@ const LazyGrid = (props: LazyGridProps) => {
     };
 
     React.useEffect(() => {
-        loadMore(search, 0, pageSize);
+        loadMore(search, items.length, pageSize);
     }, []); // initial load
 
     React.useEffect(() => {
