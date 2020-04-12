@@ -94,8 +94,8 @@ const LazyGrid = (props: LazyGridProps) => {
             <section className={classnames(className, { loading: isLoading })}>
                 <div className="items">
                     {items.map((item, i) => (
-                        <div className="item">
-                            <ItemComponent key={i} {...item} />
+                        <div className="item" key={i}>
+                            <ItemComponent {...item} />
                         </div>
                     ))}
                 </div>
