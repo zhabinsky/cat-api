@@ -12,12 +12,15 @@ async function init() {
 
     const app = express();
 
+    const apis = express.Router();
+    apis.use('/graphql', ...Middleware.graphql);
+
     app.use('/public-assets', ...Middleware.static);
-    app.use('/graphql', ...Middleware.graphql);
+    app.use('/api', apis);
     app.use(...Middleware.client);
 
     const PORT = Number(process.env.PORT);
-    app.listen(PORT, async (err) => {
+    app.listen(PORT, async err => {
         if (err) {
             console.error(err);
             return process.exit(1);

@@ -14,7 +14,7 @@ const Accordion: FunctionComponent<Props> = (props: Props) => {
             <ul>
                 {childrenSorted.map(({ title, content }, index) => {
                     return (
-                        <li>
+                        <li key={index + title}>
                             <input type="checkbox" defaultChecked={index > 0} />
                             <i />
                             <h3>{title}</h3>

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Accordion, Table } from '../../ui';
 
-const domain = typeof window !== 'undefined' ? window.location.origin : '';
+const domain = process.env.URL;
 
 const instructions = [
     {
@@ -25,13 +25,13 @@ const instructions = [
     },
 ];
 
-const CatDocs = (props) => {
+const CatDocs = props => {
     const { className } = props;
     return (
         <div className={className}>
             <h2>Documentation 😸</h2>
             <Accordion>
-                {instructions.map((e) => ({
+                {instructions.map(e => ({
                     title: e.title,
                     content: (
                         <pre>

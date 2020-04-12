@@ -3,8 +3,8 @@ import nodeFetch, { Body } from 'node-fetch';
 const isServer = typeof window === 'undefined';
 
 const GRAPH_QL_ENPOINT = isServer
-    ? `http://localhost:${8032}/graphql`
-    : '/graphql';
+    ? `http://localhost:${8032}/api/graphql`
+    : '/api/graphql';
 
 const gq = async (request: string) => {
     const fetcher = isServer ? nodeFetch : fetch;
