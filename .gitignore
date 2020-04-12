@@ -1,6 +1,6 @@
 build/
 node_modules/
 .vscode/
-src/app/client/.next/
+src/client/.next/*
 public-assets/*.png
 public-assets/*.jpeg

@@ -1,19 +1,25 @@
-rm -rf build
-mkdir -p build/app/client/public
-cp .env build/.env
-cp src/app/client/public/* build/app/client/public/
-
 export NODE_ENV=production
 
-npm run tsc
+project_dir=$(pwd)
+rm -rf build
 
-rootDir=$(pwd)
+# transpile typescript
+node ./node_modules/typescript/lib/tsc
 
-cd build/app/client
-rm -rf .next
+# prepare fresh folder for client code
+mkdir -p build/client/
+
+# copy all files from src/client to build/client
+cp -r src/client/* build/client/
+cp src/client/.* build/client/ 2>/dev/null
+
+# build next js project
+cd "${project_dir}/build/client"
 next build
 
-cd $rootDir
-cd build
+# Remove everything except .next build folder
+find . -depth 1 -type d ! -name '.next' ! -name 'public' -exec rm -rf "{}" +
+find . -depth 1 -type f -exec rm "{}" +
 
-node index.js
+# copy .env file
+cp "${project_dir}/.env" "${project_dir}/build/"

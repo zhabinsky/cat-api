@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-require('./app/server/utils/extendConsole'); // pretty console output
-require('./app/server');
+require('./server/utils/extendConsole'); // pretty console output
+require('./server');
 
 console.notify('NODE_ENV=' + process.env.NODE_ENV);

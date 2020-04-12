@@ -1,6 +1,6 @@
 export NODE_ENV=dev
 
 ts-node-dev \
-	--ignore-watch app/client \
+	--ignore-watch src/client \
 	--respawn \
 	--transpileOnly ./src/index.ts

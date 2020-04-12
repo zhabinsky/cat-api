@@ -4,13 +4,13 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "tsc": "tsc",
-        "build": "sh scripts/build.sh",
         "start": "npm run build && npm run prod",
+        "build": "sh scripts/build.sh",
+        "prod": "sh scripts/prod.sh",
+        "dev": "sh scripts/dev.sh",
         "format": "prettier \"src/**/*.ts\" \"src/**/*.tsx\" --write",
         "lint": "tslint src/**/*.ts --fix",
-        "dev": "sh scripts/dev.sh",
-        "test": "NODE_ENV=test && mocha -r ts-node/register src/**/*.spec.ts"
+        "test": "NODE_ENV=test && mocha -r ts-node/register src/**/**/*.spec.ts"
     },
     "keywords": [],
     "author": "Vlad Zhabinsky <vladislavzhabinsky@gmail.com>",
