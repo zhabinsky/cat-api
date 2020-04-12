@@ -6,13 +6,10 @@ import styled from 'styled-components';
 const Accordion: FunctionComponent<Props> = (props: Props) => {
     const { children, ...rest } = props;
 
-    const childrenSorted = [...children];
-    childrenSorted.sort((a, b) => a.title.localeCompare(b.title));
-
     return (
         <div {...rest}>
             <ul>
-                {childrenSorted.map(({ title, content }, index) => {
+                {children.map(({ title, content }, index) => {
                     return (
                         <li key={index + title}>
                             <input type="checkbox" defaultChecked={index > 0} />
@@ -71,30 +68,28 @@ export default styled(Accordion)`
         padding: 0;
         margin: 0;
         border-top: 1px dotted rgba(0, 0, 0, 0.1);
-    }
-
-    h3 {
-        font-size: 20px;
-        line-height: 34px;
-        font-weight: 300;
-        display: block;
-        margin: 0;
-        cursor: pointer;
-        height: 50px;
-        display: flex;
-        align-items: center;
-    }
-
-    .accordion-item {
-        position: relative;
-        overflow: hidden;
-        max-height: 800px;
-        @extend .transition;
-        opacity: 1;
-        transform: translate(0, 0);
-        margin-top: 14px;
-        z-index: 2;
-        ${transition}
+        h3 {
+            z-index: 9999;
+            line-height: 34px;
+            font-weight: 300;
+            display: block;
+            margin: 0;
+            cursor: pointer;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            ${transition}
+        }
+        .accordion-item {
+            position: relative;
+            overflow: hidden;
+            max-height: 800px;
+            @extend .transition;
+            opacity: 1;
+            transform: translate(0, 0);
+            z-index: 2;
+            ${transition}
+        }
     }
 
     input[type='checkbox'] {

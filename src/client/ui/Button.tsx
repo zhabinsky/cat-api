@@ -9,21 +9,16 @@ interface Props {
 
 const Button: FunctionComponent<Props> = (props: Props) => {
     const { children, ...rest } = props;
-    return (
-        <button {...rest}>
-            <span>{children}</span>
-        </button>
-    );
+    return <button {...rest}>{children}</button>;
 };
 
 export default styled(Button)`
     background-position: center;
     border-radius: 4px;
     border: none;
-    color: white;
     cursor: pointer;
-    font-size: 16px;
     outline: none;
     padding: 5px 10px;
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
 `;

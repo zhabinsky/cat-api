@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { PageDecorator } from '../decorators';
 import { ConstrainWidth } from '../ui';
 import { CatThumbnail, CatDocs } from '../components';
-import gq from '../api/gq';
+import gq, { GQResponse } from '../api/gq';
 import ErrorPage from './404';
 import { NextPage } from 'next';
 import { NextSeo } from 'next-seo';
@@ -20,7 +20,7 @@ const Page = ({ className, cat, error = false }) => {
                     <div className="cat-preview-container">
                         <CatThumbnail {...cat} className="cat-preview" />
                     </div>
-                    <CatDocs className="docs" />
+                    <CatDocs className="docs" catId={cat._id} />
                 </div>
             </ConstrainWidth>
 
@@ -87,19 +87,10 @@ PageStyled.getInitialProps = async context => {
             '',
         );
         const response = await gq(`{
-            cat: breedOne (filter: {_id: "${_id}"}) {
-                _id
-                name
-                picture
-                votes
-                temperament
-                description
-                origin {
-          name
-        }
-            }
-    }`);
-        const cat = (response as CatResponse).cat;
+            cat: breedOne (filter: {_id: "${_id}"}) {\n _id\n name\n picture\n votes\n temperament\n description\n origin { \nname\n}}}`);
+
+        const { cat } = ((response as GQResponse)
+            .data as unknown) as CatResponse;
 
         if (!cat) {
             throw Error();

@@ -20,10 +20,10 @@ const gq = async (request: string) => {
     })) as GQResponse;
 
     if (!result || result.errors) {
-        console.log('Error while fetching GQ', { result });
-        throw Error('result.errors' + JSON.stringify(result.errors));
+        throw result;
     }
-    return result.data;
+
+    return result;
 };
 
 export default gq as GQRequestFunction;

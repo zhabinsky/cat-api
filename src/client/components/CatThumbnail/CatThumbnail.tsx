@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Button, Card, Icons, Ripples } from '../../ui';
+import { Button, Card, Ripples } from '../../ui';
 import useVoting from './useVoting';
+import { FaHeart } from 'react-icons/fa';
 
 interface CountryObject {
     name: string;
@@ -51,7 +52,7 @@ const CatThumbnail = (props: ThumbnailProps) => {
                                     addVote();
                                 }}
                             >
-                                <Icons.Heart />
+                                <FaHeart />
                             </Button>
                         </Ripples>
                         <div className="voices">{votesStatus}</div>

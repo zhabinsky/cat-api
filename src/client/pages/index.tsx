@@ -2,7 +2,7 @@ import React from 'react';
 import { CatThumbnail, LazyGrid } from '../components';
 import { PageDecorator } from '../decorators';
 import { ConstrainWidth } from '../ui';
-import gq from '../api/gq';
+import gq, { GQResponse } from '../api/gq';
 import {
     FetchItemsFunction,
     LazyGridResponse,
@@ -11,8 +11,8 @@ import { NextSeo } from 'next-seo';
 
 const PAGE_SIZE = 12;
 
-const fetchBreeds = ((search: string, skip: number, limit: number) => {
-    return gq(`{
+const fetchBreeds = async (search: string, skip: number, limit: number) => {
+    const response = await gq(`{
         totalCount: breedCount
         items: breedSearch (search:"${search}", limit:${limit}, skip:${skip}) {
             _id
@@ -25,7 +25,9 @@ const fetchBreeds = ((search: string, skip: number, limit: number) => {
             }
         }
     }`);
-}) as FetchItemsFunction;
+
+    return (response as GQResponse).data as LazyGridResponse;
+};
 
 const Page = ({ breedsInitial }) => (
     <PageDecorator>
@@ -34,7 +36,7 @@ const Page = ({ breedsInitial }) => (
                 className="cats"
                 pageSize={PAGE_SIZE}
                 itemComponent={CatThumbnail}
-                fetchItems={fetchBreeds}
+                fetchItems={(fetchBreeds as unknown) as FetchItemsFunction}
                 initialData={breedsInitial as LazyGridResponse}
             />
         </ConstrainWidth>

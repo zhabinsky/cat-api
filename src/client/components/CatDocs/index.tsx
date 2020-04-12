@@ -1,44 +1,64 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Accordion, Table } from '../../ui';
+import { FaLink } from 'react-icons/fa';
+import ExecuteQuery from './ExecuteQuery';
 
 const domain = process.env.URL;
-
-const instructions = [
-    {
-        title: 'How to fetch breed via gq?',
+const prepareQueryDocs = (title, query) => {
+    return {
+        title,
         content: {
             endpoint: `${domain}/graphql`,
             method: 'POST',
             headers: 'Content-Type: application/graphql',
-            body: `{\n  breedOne (filter: {_id: "XXX"}) {\n    _id\n    name\n    picture\n    votes\n    temperament\n    description\n    origin {\n      name\n    }\n  }\n}`,
+            body: query,
+            execute: <ExecuteQuery query={query} />,
         },
-    },
-    {
-        title: 'How to vote via gq?',
-        content: {
-            endpoint: `${domain}/graphql`,
-            method: 'POST',
-            headers: 'Content-Type: application/graphql',
-            body: `mutation Vote {\n  vote(_id: "XXX") {\n    votes\n  }\n}`,
-        },
-    },
-];
+    };
+};
 
-const CatDocs = (props) => {
-    const { className } = props;
+const CatDocs = props => {
+    const { className, catId } = props;
+
+    const instructions = [
+        prepareQueryDocs(
+            'How to fetch breed via gq?',
+            `{\n  breedOne (filter: {_id: "${catId}"}) {\n    _id\n    name\n    picture\n    votes\n    temperament\n    description\n    origin {\n      name\n    }\n  }\n}`,
+        ),
+        prepareQueryDocs(
+            'How to vote via gq?',
+            `mutation Vote {\n  vote(_id: "${catId}") {\n    votes\n  }\n}`,
+        ),
+        prepareQueryDocs('Erroneous query example', `meow {\n  meow\n}`),
+    ];
+
     return (
         <div className={className}>
-            <h2>Documentation 😸</h2>
+            <h2>Tiny documentation 😸</h2>
             <Accordion>
-                {instructions.map((e) => ({
-                    title: e.title,
-                    content: (
-                        <pre>
-                            <Table data={e.content} />
-                        </pre>
-                    ),
-                }))}
+                {[
+                    ...instructions.map(e => ({
+                        title: e.title,
+                        content: (
+                            <pre>
+                                <Table data={e.content} />
+                            </pre>
+                        ),
+                    })),
+                    {
+                        title: 'More',
+                        content: (
+                            <p className="more">
+                                More information about supported queries is
+                                available at{' '}
+                                <a href="/api/graphql">
+                                    GQ playground <FaLink />
+                                </a>
+                            </p>
+                        ),
+                    },
+                ]}
             </Accordion>
         </div>
     );
@@ -56,6 +76,7 @@ export default styled(CatDocs)`
     h3 {
         color: rgba(0, 0, 0, 0.8);
     }
+
     > * {
         margin: 16px;
         overflow: hidden;
@@ -63,7 +84,8 @@ export default styled(CatDocs)`
     }
 
     pre {
-        margin-top: 0;
+        margin: 0;
+        padding: 0;
     }
 
     box-shadow: 0px 2px 1px -1px rgba(0, 0, 0, 0.2),
@@ -77,8 +99,22 @@ export default styled(CatDocs)`
     .field--body {
         color: green;
     }
+
+    .more {
+        p {
+            margin: 0;
+            padding: 0;
+            a {
+                padding: 5px 8px;
+                background: rgba(0, 0, 255, 0.04);
+                border-radius: 2px;
+                overflow: hidden;
+            }
+        }
+    }
 `;
 
 export interface CatDocsProps {
     className?: string;
+    catId?: string;
 }
