@@ -13,6 +13,10 @@ mkdir -p build/client/
 cp -r src/client/* build/client/
 cp src/client/.* build/client/ 2>/dev/null
 
+# copy .env file
+cp "${project_dir}/.env" "${project_dir}/build/"
+cp "${project_dir}/.env" "${project_dir}/build/client"
+
 # build next js project
 cd "${project_dir}/build/client"
 next build
@@ -20,6 +24,3 @@ next build
 # Remove everything except .next build folder
 find . -depth 1 -type d ! -name '.next' ! -name 'public' -exec rm -rf "{}" +
 find . -depth 1 -type f -exec rm "{}" +
-
-# copy .env file
-cp "${project_dir}/.env" "${project_dir}/build/"
