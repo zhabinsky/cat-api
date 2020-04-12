@@ -23,7 +23,7 @@ export default (_id: string, votesInit: number) => {
 
         try {
             await gq(`
-                mutation VoteForTheCat {
+                mutation Vote {
                     vote(_id: "${_id}") {
                         votes
                     }

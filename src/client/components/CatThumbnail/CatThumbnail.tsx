@@ -35,8 +35,8 @@ const CatThumbnail = (props: ThumbnailProps) => {
 
     return (
         <Card
-            url="/cat"
-            className={className}
+            url={`/cat/${_id}`}
+            className={`cat-thumbnail ${className}`}
             title={name}
             picture={picture}
             altText={`Breed: ${name}`}

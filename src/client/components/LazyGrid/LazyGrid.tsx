@@ -94,7 +94,9 @@ const LazyGrid = (props: LazyGridProps) => {
             <section className={classnames(className, { loading: isLoading })}>
                 <div className="items">
                     {items.map((item, i) => (
-                        <ItemComponent key={i} {...item} />
+                        <div className="item">
+                            <ItemComponent key={i} {...item} />
+                        </div>
                     ))}
                 </div>
                 <div className="infinite-box-status">
@@ -126,11 +128,24 @@ const LazyGrid = (props: LazyGridProps) => {
 };
 
 export default styled(LazyGrid)`
+    .item {
+        text-align: center;
+        & > * {
+            display: inline-block;
+            max-width: 300px;
+        }
+        @media (min-width: 550px) {
+            max-width: unset;
+            text-align: unset;
+        }
+    }
+
     .items {
         width: 100%;
         display: grid;
         grid-template-columns: 1fr;
         grid-gap: 15px;
+
         @media (min-width: 550px) {
             grid-template-columns: repeat(2, 1fr);
             grid-gap: 17px;

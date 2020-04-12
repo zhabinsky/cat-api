@@ -7,6 +7,7 @@ import {
     FetchItemsFunction,
     LazyGridResponse,
 } from '../components/LazyGrid/LazyGrid';
+import { NextSeo } from 'next-seo';
 
 const PAGE_SIZE = 12;
 
@@ -37,6 +38,11 @@ const Page = ({ breedsInitial }) => (
                 initialData={breedsInitial as LazyGridResponse}
             />
         </ConstrainWidth>
+
+        <NextSeo
+            title={`${breedsInitial.totalCount} cat breeds | Cat API`}
+            description={`API that allows you to fetch random cat breeds`}
+        />
     </PageDecorator>
 );
 

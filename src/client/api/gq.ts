@@ -6,12 +6,7 @@ const GRAPH_QL_ENPOINT = isServer
     ? `http://localhost:${8032}/graphql`
     : '/graphql';
 
-interface GQResponse {
-    errors: object[] | undefined;
-    data: object;
-}
-
-export default async (request: string) => {
+const gq = async (request: string) => {
     const fetcher = isServer ? nodeFetch : fetch;
 
     const promise = (fetcher(GRAPH_QL_ENPOINT, {
@@ -26,9 +21,18 @@ export default async (request: string) => {
 
     if (!result || result.errors) {
         console.log('Error while fetching GQ', { result });
-
-        throw Error('result.errors' + result.errors);
+        throw Error('result.errors' + JSON.stringify(result.errors));
     }
-
     return result.data;
 };
+
+export default gq as GQRequestFunction;
+
+export interface GQResponse {
+    errors: object[] | undefined;
+    data: object;
+}
+
+export interface GQRequestFunction {
+    (r: string): Promise<object>;
+}

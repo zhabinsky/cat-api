@@ -4,8 +4,7 @@
     "jsRules": {},
     "rules": {
         "no-console": false,
-        "no-var-requires": false,
-        "no-unused-vars": true
+        "no-var-requires": false
     },
     "rulesDirectory": []
 }

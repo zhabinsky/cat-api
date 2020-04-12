@@ -8,7 +8,7 @@ interface Props {
 
 const Footer: FunctionComponent<Props> = (props: Props) => {
     return (
-        <footer className={props.className + ' what'}>
+        <footer className={props.className}>
             <ConstrainWidth className="container">
                 <AppLogo />
                 <div className="credits">

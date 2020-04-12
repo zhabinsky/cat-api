@@ -19,7 +19,6 @@ const Filters = styled((props: LazyGridFiltersProps) => {
     );
 })`
     margin-bottom: 50px;
-    margin-top: 50px;
 
     input {
         padding: 10px 20px;

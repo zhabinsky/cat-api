@@ -10,8 +10,8 @@ const Header = (props) => {
                 <div>
                     {[
                         {
-                            title: 'Documentation',
-                            href: '/docs',
+                            title: 'GQ',
+                            href: '/graphql',
                         },
                         {
                             title: 'Code',
@@ -36,4 +36,5 @@ export default styled(Header)`
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
+    padding-bottom: 40px;
 `;

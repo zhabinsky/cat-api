@@ -10,3 +10,5 @@ export { default as Ripples } from './Ripples';
 export { default as PrettyError } from './PrettyError';
 export { default as Icons } from './Icons';
 export { default as Link } from './Link';
+export { default as Accordion } from './Accordion';
+export { default as Table } from './Table';
