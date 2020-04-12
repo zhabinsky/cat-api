@@ -20,7 +20,7 @@ async function init() {
     app.use(...Middleware.client);
 
     const PORT = Number(process.env.PORT);
-    app.listen(PORT, async err => {
+    app.listen(PORT, async (err) => {
         if (err) {
             console.error(err);
             return process.exit(1);

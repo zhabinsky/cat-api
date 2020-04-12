@@ -134,7 +134,7 @@ export default styled(LazyGrid)`
             display: inline-block;
             max-width: 300px;
         }
-        @media (min-width: 550px) {
+        @media (min-width: 768px) {
             max-width: unset;
             text-align: unset;
         }

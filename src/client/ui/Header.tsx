@@ -2,7 +2,7 @@ import { ConstrainWidth, AppLogo, Link } from '../ui';
 import styled from 'styled-components';
 import React from 'react';
 
-const Header = (props) => {
+const Header = props => {
     return (
         <ConstrainWidth>
             <header className={props.className}>
@@ -36,5 +36,5 @@ export default styled(Header)`
     display: flex;
     justify-content: space-between;
     padding-top: 20px;
-    padding-bottom: 40px;
+    padding-bottom: 20px;
 `;

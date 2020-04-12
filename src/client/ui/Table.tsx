@@ -12,7 +12,7 @@ const Table: FunctionComponent<Props> = (props: Props) => {
     return (
         <table className={props.className}>
             <tbody>
-                {Object.entries(data).map(values => (
+                {Object.entries(data).map((values) => (
                     <tr key={values[0]}>
                         <td>{values[0]}:</td>
                         <td className={`field--${values[0]}`}>{values[1]}</td>

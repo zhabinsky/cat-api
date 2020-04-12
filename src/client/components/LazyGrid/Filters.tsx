@@ -18,10 +18,13 @@ const Filters = styled((props: LazyGridFiltersProps) => {
         </div>
     );
 })`
-    margin-bottom: 50px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
     input {
-        padding: 10px 20px;
+        padding: 7px 15px;
         border: none;
         box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.1),
             0px 1px 1px 0px rgba(0, 0, 0, 0.14),
