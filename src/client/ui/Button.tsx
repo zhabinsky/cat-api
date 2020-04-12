@@ -19,6 +19,7 @@ const Button: FunctionComponent<Props> = (props: Props) => {
 };
 
 export default styled(Button)`
+    background: white;
     background-position: center;
     border-radius: 4px;
     border: none;

@@ -62,7 +62,6 @@ const ExecuteQuery: FunctionComponent<Props> = (props: Props) => {
 
 export default styled(ExecuteQuery)`
     button {
-        background: white;
         margin-bottom: 10px;
         border: 1px solid rgba(0, 0, 0, 0.2);
         svg {
