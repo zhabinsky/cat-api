@@ -87,7 +87,7 @@ export default styled(Card)`
         height: 40px;
         overflow: hidden;
         position: relative;
-        font-size: 1.25rem;
+        font-size: 20px;
         flex-shrink: 0;
         font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
         line-height: 1;
@@ -107,7 +107,7 @@ export default styled(Card)`
     }
 
     .body {
-        font-size: 0.875rem;
+        font-size: 13.5px;
         font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
         font-weight: 400;
         line-height: 1.43;

@@ -18,7 +18,7 @@ const prepareQueryDocs = (title, query) => {
     };
 };
 
-const CatDocs = (props) => {
+const CatDocs = props => {
     const { className, catId } = props;
 
     const instructions = [
@@ -38,7 +38,7 @@ const CatDocs = (props) => {
             <h2>Tiny documentation 😸</h2>
             <Accordion>
                 {[
-                    ...instructions.map((e) => ({
+                    ...instructions.map(e => ({
                         title: e.title,
                         content: (
                             <pre>
@@ -67,7 +67,7 @@ const CatDocs = (props) => {
 export default styled(CatDocs)`
     max-width: 100%;
     margin-bottom: 20px;
-    font-size: 0.875rem;
+    font-size: 12px;
     font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
     font-weight: 400;
     line-height: 1.43;
