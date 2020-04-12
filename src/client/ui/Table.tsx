@@ -24,6 +24,9 @@ const Table: FunctionComponent<Props> = (props: Props) => {
 };
 
 export default styled(Table)`
+    &, td {
+        font-size: 12px;
+    }
     td:first-child {
         font-weight: 900;
     }
