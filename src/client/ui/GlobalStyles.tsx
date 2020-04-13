@@ -9,7 +9,7 @@ export default createGlobalStyle`
 		touch-action: manipulation;
 	}
 
-	button, input {
+	button, input, select {
 		transition: transform 0.1s ease-in;
 		:focus {
 			outline: none;

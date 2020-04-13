@@ -28,12 +28,12 @@ const fetchBreeds = ((async (skip: number, limit: number, filters: object) => {
             picture
             description
             votes
+            temperament
             origin {
                 name
             }
         }
     }`;
-    console.log(query);
     const response = await gq(query);
     return (response as GQResponse).data as LazyGridResponse;
 }) as unknown) as FetchItemsFunction;
@@ -61,7 +61,7 @@ const Page = ({ breedsInitial, countryOptions }) => (
                         parameterName: 'origin',
                         options: [
                             {
-                                key: '--- Any country ---',
+                                key: 'Any country',
                                 value: '',
                             },
                             ...countryOptions,

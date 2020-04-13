@@ -3,12 +3,15 @@ import { LazyGridFilter, LazyGridFilterType } from './LazyGrid';
 import styled from 'styled-components';
 
 const FiltersContainer = styled.div`
-    margin-bottom: 30px;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
 
+    select,
     input {
+        display: block;
+        appearance: none;
+        margin-bottom: 30px;
         padding: 7px 15px;
         border: none;
         box-shadow: 0px 1px 1px -1px rgba(0, 0, 0, 0.1),
@@ -16,10 +19,19 @@ const FiltersContainer = styled.div`
             0px 1px 1px 0px rgba(0, 0, 0, 0.12);
         background: white;
         border-radius: 20px;
-        width: 250px;
-        max-width: 50vw;
         font-size: 16px;
         font-weight: 200;
+        margin-right: 10px;
+        width: 280px;
+        max-width: 45vw;
+    }
+
+    @media (max-width: 700px) {
+        flex-direction: column;
+        select,
+        input {
+            margin-right: unset;
+        }
     }
 `;
 
@@ -97,7 +109,9 @@ const useFilters = filterConfigs => {
                             >
                                 {filter.options.map(option => (
                                     <option value={option.value}>
-                                        {option.key}
+                                        {capitalizeFirstLetter(
+                                            option.key.toLowerCase(),
+                                        )}
                                     </option>
                                 ))}
                             </select>
@@ -119,3 +133,7 @@ const useFilters = filterConfigs => {
 };
 
 export default useFilters;
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}

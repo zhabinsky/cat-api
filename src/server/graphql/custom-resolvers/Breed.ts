@@ -112,7 +112,6 @@ function Query() {
             }
         }
 
-        console.log(JSON.stringify(query, null, 2));
         return query;
     };
 }

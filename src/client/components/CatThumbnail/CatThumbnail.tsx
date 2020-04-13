@@ -45,6 +45,7 @@ const CatThumbnail = (props: ThumbnailProps) => {
                 <>
                     <div className="origin">{origin.name}</div>
                     <div className="description">{description}</div>
+                    <div className="temp">really {temperament}</div>
                     <div className="like-section">
                         <Button
                             aria-label={`Vote for breed "${name}"`}
@@ -87,6 +88,15 @@ export default styled(CatThumbnail)`
         height: 60px;
         text-overflow: ellipsis;
         overflow: hidden;
+    }
+
+    .temp {
+        opacity: 0.3;
+        margin-top: 10px;
+        font-style: italic;
+        position: absolute;
+        bottom: 5px;
+        right: 5px;
     }
 
     .like-section {
