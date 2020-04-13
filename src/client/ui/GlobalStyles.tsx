@@ -6,6 +6,7 @@ export default createGlobalStyle`
 		margin: 0;
 		background: #f5f5f5;
 		font-family: 'Roboto', sans-serif;
+		touch-action: manipulation;
 	}
 
 	button, input {
