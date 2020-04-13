@@ -17,6 +17,7 @@ const prettyPrintVotes = (votes: number) => {
 
 export default (_id: string, votesInit: number) => {
     const [votes, set] = React.useState(votesInit);
+    const [hasThanked, setHasThanked] = React.useState(false);
     const alterVotes = delta => set(Math.max(votesInit, votes + delta));
     const addVote = async () => {
         // we assume the vote will be counted
@@ -29,9 +30,15 @@ export default (_id: string, votesInit: number) => {
                         votes
                     }
                 }
-            `).then(() =>
-                NotificationManager.success('Thank you for the vote!', 'Meow'),
-            );
+            `).then(() => {
+                if (!hasThanked) {
+                    NotificationManager.success(
+                        'Thank you for the vote!',
+                        'Meow',
+                    );
+                    setHasThanked(true);
+                }
+            });
         } catch (err) {
             // our assumption was wrong, reverting likes
             alterVotes(-1);
