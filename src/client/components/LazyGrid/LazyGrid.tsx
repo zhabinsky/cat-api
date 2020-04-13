@@ -134,14 +134,6 @@ const LazyGrid = (props: LazyGridProps) => {
 export default styled(LazyGrid)`
     .item {
         text-align: center;
-        & > * {
-            display: inline-block;
-            max-width: 300px;
-        }
-        @media (min-width: 768px) {
-            max-width: unset;
-            text-align: unset;
-        }
     }
 
     .items {

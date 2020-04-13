@@ -51,6 +51,10 @@ const PageStyled = styled(Page)`
     .cat-preview-container {
         position: relative;
         margin-bottom: 20px;
+        .cat-thumbnail {
+            width: 350px;
+            flex-shrink: 0;
+        }
         @media (min-width: 700px) {
             .cat-preview {
                 position: sticky;
@@ -59,9 +63,13 @@ const PageStyled = styled(Page)`
         }
     }
 
-    .cat-thumbnail {
-        width: 350px;
-        flex-shrink: 0;
+    .docs {
+        display: inline-block;
+        max-width: 300px;
+        @media (min-width: 768px) {
+            max-width: unset;
+            text-align: unset;
+        }
     }
 
     @media (min-width: 700px) {

@@ -65,6 +65,13 @@ const CatThumbnail = (props: ThumbnailProps) => {
 export default styled(CatThumbnail)`
     user-select: none;
 
+    display: inline-block;
+    max-width: 300px;
+    @media (min-width: 768px) {
+        max-width: unset;
+        text-align: unset;
+    }
+
     .origin {
         position: absolute;
         bottom: 100%;
