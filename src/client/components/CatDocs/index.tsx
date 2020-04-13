@@ -23,7 +23,7 @@ const CatDocs = props => {
     const instructions = [
         prepareQueryDocs(
             'How to fetch breed via gq?',
-            `{\n  breedOne (filter: {_id: "${catId}"}) {\n    _id\n    name\n    picture\n    votes\n    temperament\n    description\n    origin {\n      name\n    }\n  }\n}`,
+            `{\n  breedOne (filter: {_id: "${catId}"}) {\n    _id\n    name\n    picture\n    votes\n    temperament\n    origin {\n      name\n    }\n  }\n}`,
         ),
         prepareQueryDocs(
             'How to vote via gq?',
