@@ -1,6 +1,7 @@
 import TypeComposers from '../type-composers';
 import Models from '../../models';
 import { BreedDocument } from '../../models/Breed';
+import mongoose, { MongooseFilterQuery, FilterQuery } from 'mongoose';
 
 const { Breed, Country } = TypeComposers;
 
@@ -42,11 +43,32 @@ Breed.addResolver({
         search: 'String',
         skip: { type: 'Int', defaultValue: 0 },
         limit: { type: 'Int', defaultValue: 10 },
+        origin: { type: 'String' },
     },
     resolve: async ({ source, args, context, info }) => {
         return await new Promise((resolve, reject) => {
+            const conditions = {
+                isText: v => !!v && typeof v === 'string',
+            };
+
+            const query = new Query();
+
+            query.addCriteria({
+                condition: conditions.isText(args.search),
+                type: 'AND',
+                parameterName: 'name',
+                value: () => ({ $regex: args.search, $options: 'i' }),
+            });
+
+            query.addCriteria({
+                condition: conditions.isText(args.origin),
+                type: 'AND',
+                parameterName: 'origin',
+                value: () => mongoose.Types.ObjectId(args.origin),
+            });
+
             Models.Breed.Model.find(
-                { name: { $regex: String(args.search), $options: 'i' } },
+                query.generate(),
                 null,
                 { limit: Number(args.limit), skip: Number(args.skip) },
                 (err, docs: BreedDocument[]) => {
@@ -57,3 +79,40 @@ Breed.addResolver({
         });
     },
 });
+
+function Query() {
+    this.criteria = [];
+    this.addCriteria = ({ condition, type, parameterName, value }) => {
+        this.criteria.push([condition, type, parameterName, value]);
+    };
+
+    const getCriteriaOfType = type => {
+        return this.criteria
+            .filter(([condition]) => condition) // filter out criteria which dont apply
+            .map(([, ...rest]) => rest) // format
+            .filter(([t]) => t === type)
+            .map(([, ...rest]) => rest) // format
+            .map(([k, getValue]) => ({
+                [k]: getValue(),
+            }));
+    };
+
+    this.generate = () => {
+        const criteria = getCriteriaOfType('AND');
+
+        let query = {} as FilterQuery<BreedDocument>;
+
+        if (criteria.length > 0) {
+            if (criteria.length === 1) {
+                query = criteria[0];
+            } else {
+                query = {
+                    $and: criteria,
+                };
+            }
+        }
+
+        console.log(JSON.stringify(query, null, 2));
+        return query;
+    };
+}

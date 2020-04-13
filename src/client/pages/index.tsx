@@ -38,7 +38,7 @@ const fetchBreeds = ((async (skip: number, limit: number, filters: object) => {
     return (response as GQResponse).data as LazyGridResponse;
 }) as unknown) as FetchItemsFunction;
 
-const Page = ({ breedsInitial }) => (
+const Page = ({ breedsInitial, countryOptions }) => (
     <PageDecorator>
         <ConstrainWidth>
             <LazyGrid
@@ -58,16 +58,13 @@ const Page = ({ breedsInitial }) => (
                     {
                         type: LazyGridFilterType.Select,
                         title: 'breed origin',
-                        parameterName: 'string',
+                        parameterName: 'origin',
                         options: [
                             {
-                                key: 'COUNTRY1',
-                                value: 'BLAHBLAH',
+                                key: '--- Any country ---',
+                                value: '',
                             },
-                            {
-                                key: 'COUNTRY2',
-                                value: 'UGH',
-                            },
+                            ...countryOptions,
                         ],
                     },
                 ]}
@@ -81,9 +78,20 @@ const Page = ({ breedsInitial }) => (
 );
 
 Page.getInitialProps = async () => {
+    const countries = (await gq(`{
+        countries: countryMany {
+          key: name
+          value: _id
+        }
+    }`)) as GQResponse;
     return {
         breedsInitial: await fetchBreeds(0, PAGE_SIZE, { search: '' }),
+        countryOptions: (countries.data as CountriesResponse).countries,
     };
 };
 
 export default Page;
+
+export interface CountriesResponse {
+    countries: [];
+}

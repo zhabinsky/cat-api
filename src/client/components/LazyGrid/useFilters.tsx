@@ -65,23 +65,42 @@ const useFilters = filterConfigs => {
     const filterElements = (
         <FiltersContainer>
             {filterConfigs.map(filter => {
-                const { parameterName } = filter;
+                const { parameterName, title } = filter;
                 switch (filter.type) {
                     case LazyGridFilterType.Input: {
                         return (
                             <input
                                 key={parameterName}
-                                title={filter.title}
+                                title={title}
                                 type="text"
-                                alt={filter.title}
-                                placeholder={filter.title}
+                                alt={title}
+                                placeholder={title}
                                 onChange={(event: React.ChangeEvent) => {
                                     const target = event.target as HTMLInputElement;
                                     const value: string = target.value;
-                                    // onFiltersChange(value);
-                                    setParameter(filter.parameterName, value);
+                                    setParameter(parameterName, value);
                                 }}
                             />
+                        );
+                    }
+                    case LazyGridFilterType.Select: {
+                        return (
+                            <select
+                                name={title}
+                                onChange={(
+                                    event: React.FormEvent<HTMLSelectElement>,
+                                ) => {
+                                    var value: string =
+                                        event.currentTarget.value;
+                                    setParameter(parameterName, value);
+                                }}
+                            >
+                                {filter.options.map(option => (
+                                    <option value={option.value}>
+                                        {option.key}
+                                    </option>
+                                ))}
+                            </select>
                         );
                     }
                     default: {

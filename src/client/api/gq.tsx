@@ -7,12 +7,12 @@ const GRAPH_QL_ENPOINT = isServer
     ? `http://localhost:${8032}/api/graphql`
     : '/api/graphql';
 
-const gq = async (request: string) => {
+const gq = async (query: string) => {
     const fetcher = isServer ? nodeFetch : fetch;
 
     const promise = (fetcher(GRAPH_QL_ENPOINT, {
         method: 'POST',
-        body: request,
+        body: query,
         headers: { 'Content-Type': 'application/graphql' },
     }) as unknown) as Promise<Body>;
 
@@ -27,7 +27,13 @@ const gq = async (request: string) => {
     if (result.errors) {
         if (!isServer) {
             result.errors.forEach(({ message }) =>
-                NotificationManager.error(message, 'Oops..'),
+                NotificationManager.error(
+                    <div>
+                        {message}
+                        <pre>{query}</pre>
+                    </div>,
+                    'Oops..',
+                ),
             );
         }
 

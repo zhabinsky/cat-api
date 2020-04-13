@@ -17,7 +17,7 @@
     top: 0;
     right: 0;
     z-index: 999999;
-    width: 320px;
+    width: fit-content;
     padding: 0px 15px;
     max-height: calc(100% - 30px);
     overflow-x: hidden;
@@ -35,8 +35,9 @@
     font-size: 1em;
     line-height: 1.2em;
     position: relative;
-    opacity: 0.9;
+    opacity: 1;
     margin-top: 15px;
+    border-radius: 4px;
 }
 
 .notification .title {
@@ -96,7 +97,7 @@
 }
 
 .notification-success {
-    background-color: #51a351;
+    background-color: #5ed05e;
 }
 
 .notification-success:before {
@@ -112,7 +113,7 @@
 }
 
 .notification-error {
-    background-color: #bd362f;
+    background-color: #f77972;
 }
 
 .notification-error:before {
