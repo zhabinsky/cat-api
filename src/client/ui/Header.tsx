@@ -11,7 +11,7 @@ const Header = props => {
                     {[
                         {
                             title: 'GQ',
-                            href: '/graphql',
+                            href: '/api/graphql',
                         },
                         {
                             title: 'Code',
