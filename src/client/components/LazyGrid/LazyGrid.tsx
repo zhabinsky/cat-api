@@ -3,7 +3,9 @@ import debounce from 'lodash.debounce';
 import React from 'react';
 import styled from 'styled-components';
 import { PrettyError } from '../../ui';
-import Filters from './Filters';
+import useFilters from './useFilters';
+
+// Lazy load logic inspired by: https://alligator.io/react/react-infinite-scroll/
 
 const LazyGrid = (props: LazyGridProps) => {
     const {
@@ -15,6 +17,7 @@ const LazyGrid = (props: LazyGridProps) => {
             items: [],
             totalCount: 0,
         },
+        filters,
         ...rest
     } = props;
 
@@ -24,17 +27,13 @@ const LazyGrid = (props: LazyGridProps) => {
     const [totalCountItems, setTotalCountItems] = React.useState(
         initialData.totalCount,
     );
-    const [search, setSearch] = React.useState('');
+    const { filterId, currentFilters, filterElements } = useFilters(filters);
+    const countItemsHidden = totalCountItems - items.length;
 
-    const loadMore = async (
-        searchValue: string,
-        skipItems: number,
-        limitItems: number,
-        append: boolean = true,
-    ) => {
+    const loadMore = async (skip: number, append: boolean = true) => {
         setIsLoading(true);
 
-        const response = await fetchItems(searchValue, skipItems, limitItems);
+        const response = await fetchItems(skip, pageSize, currentFilters);
 
         const {
             items: newItems,
@@ -56,42 +55,29 @@ const LazyGrid = (props: LazyGridProps) => {
     };
 
     React.useEffect(() => {
-        loadMore(search, items.length, pageSize);
-    }, []); // initial load
-
-    React.useEffect(() => {
         window.onscroll = debounce(() => {
             let el = document.documentElement;
             if (el.scrollTop === 0) {
                 el = document.body;
-
                 // Safari and Chrome appear to have different behaviour
                 // hence this little condition
             }
             if (window.innerHeight + el.scrollTop > el.offsetHeight - 500) {
-                loadMore(search, items.length, pageSize);
-
+                loadMore(items.length, true);
                 window.onscroll = undefined; // remove listener
             }
         }, 20);
-    }, [items.length, isLoading, search]);
-
-    const countItemsHidden = totalCountItems - items.length;
+    }, [filterId, items.length, isLoading]);
+    React.useEffect(() => {
+        if (filterId === 0) {
+            return;
+        }
+        loadMore(0, false); // load items when filters change
+    }, [filterId]);
 
     return (
         <>
-            <Filters
-                onSearchChange={(input: string) => {
-                    if (items.length === 0 && input.indexOf(search) === 0) {
-                        // We know this query does not match any items
-                        // we shall ignore it
-                        return;
-                    }
-                    setSearch(input);
-                    setHasLoadedAll(false);
-                    loadMore(input, 0, pageSize, false);
-                }}
-            />
+            {filterElements}
             <section
                 className={classnames(className, { loading: isLoading })}
                 {...rest}
@@ -190,10 +176,8 @@ export default styled(LazyGrid)`
     }
 `;
 
-// Lazy load logic inspired by: https://alligator.io/react/react-infinite-scroll/
-
 export interface FetchItemsFunction {
-    (search: string, skip: number, limit: number): Promise<LazyGridProps>;
+    (skip: number, limit: number, filters?: object): Promise<LazyGridProps>;
 }
 
 export interface LazyGridResponse {
@@ -207,4 +191,23 @@ export interface LazyGridProps {
     itemComponent: Function;
     fetchItems: FetchItemsFunction;
     initialData: LazyGridResponse;
+    filters: LazyGridFilter[];
+}
+
+export interface SelectOption {
+    key: string;
+    value: string;
+}
+
+export enum LazyGridFilterType {
+    Input,
+    Select,
+}
+
+export interface LazyGridFilter {
+    type: LazyGridFilterType;
+    title: string;
+    parameterName: string;
+    defaultValue?: string;
+    options?: SelectOption[]; // needed when type === "selector"
 }
