@@ -34,7 +34,14 @@ const Page = ({ className, cat, error = false }) => {
                     description: `View "${
                         cat.name
                     }" and learn how to retrieve this breed from the API`,
-                    images: [{ url: process.env.URL + '/' + cat.picture }],
+                    images: [
+                        {
+                            url:
+                                process.env.URL +
+                                '/public-assets/' +
+                                cat.picture,
+                        },
+                    ],
                     site_name: 'CAT API',
                 }}
             />
