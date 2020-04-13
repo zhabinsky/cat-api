@@ -1,7 +1,7 @@
 import TypeComposers from '../type-composers';
 import Models from '../../models';
 import { BreedDocument } from '../../models/Breed';
-import mongoose, { MongooseFilterQuery, FilterQuery } from 'mongoose';
+import mongoose, { FilterQuery } from 'mongoose';
 
 const { Breed, Country } = TypeComposers;
 
