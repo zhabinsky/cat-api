@@ -66,7 +66,7 @@ const PageStyled = styled(Page)`
     .docs {
         display: inline-block;
         max-width: 300px;
-        @media (min-width: 668px) {
+        @media (min-width: 568px) {
             max-width: unset;
             text-align: unset;
         }
