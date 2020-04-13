@@ -8,27 +8,36 @@ interface Props {
 
 const Table: FunctionComponent<Props> = (props: Props) => {
     const { data } = props;
-
     return (
-        <table className={props.className}>
-            <tbody>
-                {Object.entries(data).map(values => (
-                    <tr key={values[0]}>
-                        <td>{values[0]}:</td>
-                        <td className={`field--${values[0]}`}>{values[1]}</td>
-                    </tr>
-                ))}
-            </tbody>
-        </table>
+        <div className={props.className}>
+            {Object.entries(data).map(values => (
+                <div className="row" key={values[0]}>
+                    <div>{values[0]}:</div>
+                    <div className={`field--${values[0]}`}>{values[1]}</div>
+                </div>
+            ))}
+        </div>
     );
 };
 
 export default styled(Table)`
-    td {
-        padding: 0 5px 5px 0;
-        vertical-align: top;
+    font-size: 12px;
+    font-weight: 900;
 
-        font-size: 12px;
-        font-weight: 900;
+    .row {
+        display: flex;
+        margin-bottom: 3px;
+        div {
+            white-space: pre-wrap;
+        }
+        > div {
+            :first-child {
+                width: 80px;
+                flex-shrink: 0;
+            }
+            :nth-child(2) {
+                width: calc(100% - 80px);
+            }
+        }
     }
 `;

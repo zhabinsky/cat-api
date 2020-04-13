@@ -46,7 +46,7 @@ export default class MyDocument extends Document {
                             type: 'website',
                             locale: 'en',
                             site_name: 'CAT API',
-                            images: [{ url: '/oops/png' }],
+                            images: [{ url: process.env.URL + '/oops.png' }],
                         }}
                     />
                     <Main />

@@ -4,12 +4,11 @@ import { Accordion, Table } from '../../ui';
 import { FaLink } from 'react-icons/fa';
 import ExecuteQuery from './ExecuteQuery';
 
-const domain = process.env.URL;
 const prepareQueryDocs = (title, query) => {
     return {
         title,
         content: {
-            endpoint: `${domain}/graphql`,
+            endpoint: `${process.env.URL}/graphql`,
             method: 'POST',
             headers: 'Content-Type: application/graphql',
             body: query,
