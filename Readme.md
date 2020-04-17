@@ -15,7 +15,7 @@ npm start
 
 # Run in development
 npm i
-npm start dev
+npm run dev
 ```
 
 ## Description of the app
