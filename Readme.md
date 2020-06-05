@@ -1,6 +1,6 @@
 # Cat Breeds (GraphQL API and FE App)
 
-## [Check out deployed app: Cat API](https://meow.ponasasilas.com)
+## [Live Cat API](https://meow.ponasasilas.com)
 
 # Start locally
 
@@ -30,10 +30,13 @@ An app where user can see list of cat breeds.
 
 -   ✅ Pleasing and ✅ responsive UI.
 -   ✅ Clear API URL endpoints.
-    -   /api/graphql
+    - ✅ Exposing just one endpoint /api/graphql
 -   Accessibility/Security.
     -   ✅ Used chrome extension SiteImprove to find accesibility issues
-    -   Security: - ✅ mongo runs locally on the server, ports closed, root access forbidden - ✅ app is behind CF - Would add similar checks if I had any sensitive gq queries/mutations: https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html
+    -   Security: 
+        - ✅ mongo runs locally on the server, ports closed, root access forbidden 
+        - ✅ app is behind CF 
+        - Would add similar checks if I had any sensitive gq queries/mutations: https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html
 -   Clean code, component based structure and best coding practices in use.
 -   Good data structure.
 -   Attention to detail.
